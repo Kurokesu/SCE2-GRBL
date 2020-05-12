@@ -45,11 +45,14 @@
 #define MODAL_GROUP_M7 12 // [M3,M4,M5] Spindle turning
 #define MODAL_GROUP_M8 13 // [M7,M8,M9] Coolant control
 #define MODAL_GROUP_M9 14 // [M56] Override control
+#define MODAL_GROUP_G100 15 // TMC2300 control
+
+
 
 // Define command actions for within execution-type modal groups (motion, stopping, non-modal). Used
 // internally by the parser to know which command to execute.
 // NOTE: Some macro values are assigned specific values to make g-code state reporting and parsing 
-// compile a litte smaller. Necessary due to being completely out of flash on the 328p. Although not
+// compile a little smaller. Necessary due to being completely out of flash on the 328p. Although not
 // ideal, just be careful with values that state 'do not alter' and check both report.c and gcode.c 
 // to see how they are used, if you need to alter them.
 
@@ -64,6 +67,9 @@
 #define NON_MODAL_ABSOLUTE_OVERRIDE 53 // G53 (Do not alter value)
 #define NON_MODAL_SET_COORDINATE_OFFSET 92 // G92 (Do not alter value)
 #define NON_MODAL_RESET_COORDINATE_OFFSET 102 //G92.1 (Do not alter value)
+#define NON_MODAL_G100 100 //G100 TMC SCE2
+#define NON_MODAL_G101 101 //G101 TMC SCE2
+
 
 // Modal Group G1: Motion modes
 #define MOTION_MODE_SEEK 0 // G0 (Default: Must be zero)
@@ -118,6 +124,12 @@
 #define COOLANT_DISABLE 0 // M9 (Default: Must be zero)
 #define COOLANT_FLOOD_ENABLE  PL_COND_FLAG_COOLANT_FLOOD // M8 (NOTE: Uses planner condition bit flag)
 #define COOLANT_MIST_ENABLE   PL_COND_FLAG_COOLANT_MIST  // M7 (NOTE: Uses planner condition bit flag)
+
+// Model Group G100: Set TMC2300 parameters over UART
+#define TMC_SET_DISABLED 0
+#define TMC_SET_RUN_PWR  1
+#define TMC_SET_IDLE_PWR 2
+
 
 // Modal Group G8: Tool length offset
 #define TOOL_LENGTH_OFFSET_CANCEL 0 // G49 (Default: Must be zero)

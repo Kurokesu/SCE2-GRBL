@@ -21,7 +21,7 @@
 							<option id="com.atollic.truestudio.toolchain_options.mcu.1611318768" name="Microcontroller" superClass="com.atollic.truestudio.toolchain_options.mcu" useByScannerDiscovery="false" value="STM32F103C8" valueType="string"/>
 							<option id="com.atollic.truestudio.toolchain_options.vendor.2117858790" name="Vendor name" superClass="com.atollic.truestudio.toolchain_options.vendor" useByScannerDiscovery="false" value="STMicroelectronics" valueType="string"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.debug.toolchain.platform.1755457428" isAbstract="false" name="Debug platform" osList="all" superClass="com.atollic.truestudio.exe.debug.toolchain.platform"/>
-							<builder buildPath="${workspace_loc:/stm32grbl11}/Debug" customBuilderProperties="toolChainpathType=1|toolChainpathString=C:\\Program Files (x86)\\Atollic\\TrueSTUDIO for STM32 9.1.0\\ARMTools\\bin|" id="com.atollic.truestudio.mbs.builder1.438678195" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
+							<builder buildPath="${workspace_loc:/stm32grbl11}/Debug" customBuilderProperties="toolChainpathString=C:\\Program Files (x86)\\Atollic\\TrueSTUDIO for STM32 9.3.0\\ARMTools\\bin|toolChainpathType=1|" id="com.atollic.truestudio.mbs.builder1.438678195" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.as.1459491750" name="Assembler" superClass="com.atollic.truestudio.exe.debug.toolchain.as">
 								<option id="com.atollic.truestudio.common_options.target.endianess.1313851991" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess" useByScannerDiscovery="false"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.895783165" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="STM32F103C8" valueType="enumerated"/>
@@ -50,6 +50,7 @@
 									<listOptionValue builtIn="false" value="LEDBLINK"/>
 									<listOptionValue builtIn="false" value="USEUSB"/>
 									<listOptionValue builtIn="false" value="STM32F103C8"/>
+									<listOptionValue builtIn="false" value="USE_TMC2300"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.directories.select.1229813592" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../src"/>
@@ -151,7 +152,7 @@
 							<option id="com.atollic.truestudio.toolchain_options.mcu.2078215275" name="Microcontroller" superClass="com.atollic.truestudio.toolchain_options.mcu" value="STM32F103C8" valueType="string"/>
 							<option id="com.atollic.truestudio.toolchain_options.vendor.990801743" name="Vendor name" superClass="com.atollic.truestudio.toolchain_options.vendor" value="STMicroelectronics" valueType="string"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.release.toolchain.platform.1617448500" isAbstract="false" name="release platform" superClass="com.atollic.truestudio.exe.release.toolchain.platform"/>
-							<builder buildPath="${workspace_loc:/stm32grbl11}/Release" customBuilderProperties="toolChainpathType=1|toolChainpathString=C:\\Program Files (x86)\\Atollic\\TrueSTUDIO for STM32 9.1.0\\ARMTools\\bin|" id="com.atollic.truestudio.mbs.builder1.153121099" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
+							<builder buildPath="${workspace_loc:/stm32grbl11}/Release" customBuilderProperties="toolChainpathString=C:\\Program Files (x86)\\Atollic\\TrueSTUDIO for STM32 9.3.0\\ARMTools\\bin|toolChainpathType=1|" id="com.atollic.truestudio.mbs.builder1.153121099" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
 							<tool id="com.atollic.truestudio.exe.release.toolchain.as.1696080460" name="Assembler" superClass="com.atollic.truestudio.exe.release.toolchain.as">
 								<option id="com.atollic.truestudio.common_options.target.endianess.701558167" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1516030003" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F103C8" valueType="enumerated"/>
@@ -180,6 +181,7 @@
 									<listOptionValue builtIn="false" value="STM32F103C8T6"/>
 									<listOptionValue builtIn="false" value="_GRBL_"/>
 									<listOptionValue builtIn="false" value="__ASSEMBLY__"/>
+									<listOptionValue builtIn="false" value="USE_TMC2300"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.directories.select.2113448262" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../src"/>

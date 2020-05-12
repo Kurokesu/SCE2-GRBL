@@ -41,6 +41,7 @@ void USB_LP_CAN1_RX0_IRQHandler(void);
 
 #if defined (USE_STM3210B_EVAL) || defined (USE_STM3210E_EVAL)
 void USART1_IRQHandler(void);
+void USART3_IRQHandler(void);
 #endif /* USE_STM3210B_EVAL or USE_STM3210E_EVAL */
 
 #ifdef USE_STM3210C_EVAL

@@ -134,7 +134,7 @@
 // If homing is enabled, homing init lock sets Grbl into an alarm state upon power up. This forces
 // the user to perform the homing cycle (or override the locks) before doing anything else. This is
 // mainly a safety feature to remind the user to home, since position is unknown to Grbl.
-#define HOMING_INIT_LOCK // Comment to disable
+//#define HOMING_INIT_LOCK // Comment to disable
 
 // Define the homing cycle patterns with bitmasks. The homing cycle first performs a search mode
 // to quickly engage the limit switches, followed by a slower locate mode, and finished by a short
@@ -186,12 +186,12 @@
 // cycle is still invoked by the $H command. This is disabled by default. It's here only to address
 // users that need to switch between a two-axis and three-axis machine. This is actually very rare.
 // If you have a two-axis machine, DON'T USE THIS. Instead, just alter the homing cycle for two-axes.
-// #define HOMING_SINGLE_AXIS_COMMANDS // Default disabled. Uncomment to enable.
+#define HOMING_SINGLE_AXIS_COMMANDS // Default disabled. Uncomment to enable.
 
 // After homing, Grbl will set by default the entire machine space into negative space, as is typical
 // for professional CNC machines, regardless of where the limit switches are located. Uncomment this
 // define to force Grbl to always set the machine origin at the homed location despite switch orientation.
-// #define HOMING_FORCE_SET_ORIGIN // Uncomment to enable.
+#define HOMING_FORCE_SET_ORIGIN // Uncomment to enable.
 
 // Number of blocks Grbl executes upon startup. These blocks are stored in EEPROM, where the size
 // and addresses are defined in settings.h. With the current settings, up to 2 startup blocks may
@@ -267,7 +267,7 @@
 // will be applied to all of them. This is useful when a user has a mixed set of limit pins with both
 // normally-open(NO) and normally-closed(NC) switches installed on their machine.
 // NOTE: PLEASE DO NOT USE THIS, unless you have a situation that needs it.
-// #define INVERT_LIMIT_PIN_MASK ((1<<X_LIMIT_BIT)|(1<<Y_LIMIT_BIT)) // Default disabled. Uncomment to enable.
+// #define INVERT_LIMIT_PIN_MASK ((1<<X_LIMIT_BIT)|(1<<Y_LIMIT_BIT)|(1<<Z_LIMIT_BIT)|(1<<A_LIMIT_BIT)) // Default disabled. Uncomment to enable.
 
 // Inverts the spindle enable pin from low-disabled/high-enabled to low-enabled/high-disabled. Useful
 // for some pre-built electronic boards.

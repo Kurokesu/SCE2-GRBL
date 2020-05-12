@@ -164,6 +164,12 @@ uint8_t gc_execute_line(char *line)
               mantissa = 0; // Set to zero to indicate valid non-integer G command.
             }                
             break;
+          case 100: case 101:
+        	// G100 SCE2
+        	// G101 SCE2
+            word_bit = MODAL_GROUP_G100;
+            gc_block.non_modal_command = int_value;
+            break;
           case 0: case 1: case 2: case 3: case 38:
             // Check for G0/1/2/3/38 being called with G10/28/30/92 on same block.
             // * G43.1 is also an axis command but is not explicitly defined this way.
@@ -466,6 +472,38 @@ uint8_t gc_execute_line(char *line)
     if (bit_isfalse(value_words,bit(WORD_P))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [P word missing]
     bit_false(value_words,bit(WORD_P));
   }
+
+
+  // [xx. G100]: TMC control
+  // G100 P0 L96 N0 S2 F2 $0D$0A
+  if (gc_block.non_modal_command == NON_MODAL_G100) {
+    if (bit_isfalse(value_words,bit(WORD_P))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [P word missing]
+    bit_false(value_words, bit(WORD_P));
+
+    if (bit_isfalse(value_words,bit(WORD_L))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [L word missing]
+    bit_false(value_words, bit(WORD_L));
+
+    if (bit_isfalse(value_words,bit(WORD_N))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [N word missing]
+    bit_false(value_words, bit(WORD_N));
+
+    if (bit_isfalse(value_words,bit(WORD_S))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [S word missing]
+    bit_false(value_words, bit(WORD_S));
+
+    if (bit_isfalse(value_words,bit(WORD_F))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [F word missing]
+    bit_false(value_words, bit(WORD_F));
+  }
+
+  // [xx. G101]: TMC read
+  // G101 P0 R16 $0D$0A
+  if (gc_block.non_modal_command == NON_MODAL_G101) {
+    if (bit_isfalse(value_words,bit(WORD_P))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [P word missing]
+    bit_false(value_words, bit(WORD_P));
+
+    if (bit_isfalse(value_words,bit(WORD_R))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [R word missing]
+    bit_false(value_words, bit(WORD_R));
+  }
+
+
 
   // [11. Set active plane ]: N/A
   switch (gc_block.modal.plane_select) {
@@ -839,6 +877,10 @@ uint8_t gc_execute_line(char *line)
     }
   }
 
+
+
+  // [
+
   // [21. Program flow ]: No error checks required.
 
   // [0. Non-specific error-checks]: Complete unused value words check, i.e. IJK used when in arc
@@ -988,6 +1030,7 @@ uint8_t gc_execute_line(char *line)
   }
   pl_data->condition |= gc_state.modal.coolant; // Set condition flag for planner use.
 
+
 	// [9. Override control ]: NOT SUPPORTED. Always enabled. Except for a Grbl-only parking control.
 #ifdef ENABLE_PARKING_OVERRIDE_CONTROL
 	if (gc_state.modal.override != gc_block.modal.override) {
@@ -998,6 +1041,22 @@ uint8_t gc_execute_line(char *line)
 
   // [10. Dwell ]:
   if (gc_block.non_modal_command == NON_MODAL_DWELL) { mc_dwell(gc_block.values.p); }
+
+
+  // G100
+  if (gc_block.non_modal_command == NON_MODAL_G100) {
+	  // if enabled will be synced with command queue
+	  //protocol_buffer_synchronize();
+	  tmc_set(gc_block.values.p, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f);
+  }
+
+
+  // G101
+  if (gc_block.non_modal_command == NON_MODAL_G101) {
+	  // if enabled will be synced with command queue
+	  //protocol_buffer_synchronize();
+	  tmc_read(gc_block.values.p, gc_block.values.r);
+  }
 
   // [11. Set active plane ]:
   gc_state.modal.plane_select = gc_block.modal.plane_select;

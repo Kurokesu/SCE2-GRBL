@@ -22,8 +22,8 @@
 #define grbl_h
 
 // Grbl versioning system
-#define GRBL_VERSION "1.1f"
-#define GRBL_VERSION_BUILD "20180715" //20170801
+#define GRBL_VERSION "1.1f-SCE2"
+#define GRBL_VERSION_BUILD "20200405"
 
 #if !defined(STM32F103C8) && !defined(WIN32)
 #define AVRTARGET
@@ -107,6 +107,7 @@ typedef int bool;
 #include "spindle_control.h"
 #include "stepper.h"
 #include "jog.h"
+#include "tmc2300.h"
 
 // ---------------------------------------------------------------------------------------
 // COMPILE-TIME ERROR CHECKING OF DEFINE VALUES:

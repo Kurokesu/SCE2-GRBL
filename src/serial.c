@@ -59,6 +59,15 @@ uint8_t serial_tx_buffer_head = 0;
 volatile uint8_t serial_tx_buffer_tail = 0;
 
 
+uint8_t serial3_rx_buffer[RX_RING_BUFFER];
+uint8_t serial3_rx_buffer_head = 0;
+volatile uint8_t serial3_rx_buffer_tail = 0;
+
+uint8_t serial3_tx_buffer[TX_RING_BUFFER];
+uint8_t serial3_tx_buffer_head = 0;
+volatile uint8_t serial3_tx_buffer_tail = 0;
+
+
 // Returns the number of bytes available in the RX serial buffer.
 uint8_t serial_get_rx_buffer_available()
 {
@@ -76,6 +85,14 @@ uint8_t serial_get_rx_buffer_count()
   if (serial_rx_buffer_head >= rtail) { return(serial_rx_buffer_head-rtail); }
   return (RX_BUFFER_SIZE - (rtail-serial_rx_buffer_head));
 }
+
+uint8_t serial3_get_rx_buffer_count()
+{
+  uint8_t rtail = serial3_rx_buffer_tail; // Copy to limit multiple calls to volatile
+  if (serial3_rx_buffer_head >= rtail) { return(serial3_rx_buffer_head-rtail); }
+  return (RX_BUFFER_SIZE - (rtail-serial3_rx_buffer_head));
+}
+
 
 
 // Returns the number of bytes used in the TX serial buffer.
@@ -296,6 +313,25 @@ uint8_t serial_read()
   }
 }
 
+// Fetches the first byte in the serial read buffer. Called by main program.
+uint8_t serial3_read()
+{
+  uint8_t tail = serial3_rx_buffer_tail; // Temporary serial_rx_buffer_tail (to optimize for volatile)
+  if (serial3_rx_buffer_head == tail) {
+    return SERIAL_NO_DATA;
+  } else {
+    uint8_t data = serial3_rx_buffer[tail];
+
+    tail++;
+    if (tail == RX_RING_BUFFER) { tail = 0; }
+    serial3_rx_buffer_tail = tail;
+
+    return data;
+  }
+}
+
+
+
 #ifdef AVRTARGET
 ISR(SERIAL_RX)
 {
@@ -426,7 +462,77 @@ void USART1_IRQHandler (void)
 #endif
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------------------
+  USART3_IRQHandler
+  Handles USART3 global interrupt request.
+ *----------------------------------------------------------------------------*/
+void USART3_IRQHandler (void)
+{
+    volatile unsigned int IIR;
+    uint8_t data;
+    uint8_t next_head;
+
+    IIR = USART3->SR;
+    if (IIR & USART_FLAG_RXNE)
+    {                  // read interrupt
+        data = USART3->DR & 0x1FF;
+
+        next_head = serial3_rx_buffer_head + 1;
+        if (next_head == RX_RING_BUFFER) { next_head = 0; }
+
+        // Write data to buffer unless it is full.
+        if (next_head != serial3_rx_buffer_tail)
+        {
+          serial3_rx_buffer[serial3_rx_buffer_head] = data;
+          serial3_rx_buffer_head = next_head;
+        }
+        USART3->SR &= ~USART_FLAG_RXNE;	          // clear interrupt
+   }
+
+}
+
+// -----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 void serial_reset_read_buffer()
 {
   serial_rx_buffer_tail = serial_rx_buffer_head;
+}
+
+void serial3_reset_read_buffer()
+{
+  serial3_rx_buffer_tail = serial3_rx_buffer_head;
 }

@@ -61,6 +61,7 @@ void limits_init()
 #ifdef DISABLE_LIMIT_PIN_PULL_UP
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 #else
+	//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; // ZZZZZZZZZZZZZZZZZZZZZZ
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
 #endif
 	GPIO_InitStructure.GPIO_Pin = LIMIT_MASK;
@@ -130,13 +131,52 @@ void limits_disable()
 // number in bit position, i.e. Z_AXIS is (1<<2) or bit 2, and Y_AXIS is (1<<1) or bit 1.
 uint8_t limits_get_state()
 {
+#define READ_CNT 10
   uint8_t limit_state = 0;
 #if defined(AVRTARGET) || defined(STM32F103C8)
 #if defined(AVRTARGET)
   uint8_t pin = (LIMIT_PIN & LIMIT_MASK);
 #endif
 #if defined(STM32F103C8)
-  uint16_t pin = GPIO_ReadInputData(LIMIT_PIN);
+  bool bouncy_detected = false;	// ZZZZZZZZZZ
+
+  // uint16_t pin = GPIO_ReadInputData(LIMIT_PIN); // original
+
+  uint16_t pin, pin2 = 0;
+  pin = GPIO_ReadInputData(LIMIT_PIN);
+
+  /*
+  for(int i=0; i<READ_CNT; i++){
+	  uint16_t pin2 = GPIO_ReadInputData(LIMIT_PIN);
+	  if(pin != pin2)
+	  {
+		  bouncy_detected = true;
+		  // do something???
+	  }
+  }
+  */
+
+  uint8_t i = 0;
+  do{
+	  pin2 = GPIO_ReadInputData(LIMIT_PIN);
+	  if(pin != pin2)
+	  {
+		  bouncy_detected = true;
+		  i = 0;
+		  pin = GPIO_ReadInputData(LIMIT_PIN);
+	  }
+	  i++;
+  } while (i<READ_CNT);
+
+
+  /*
+  if(bouncy_detected){
+	  printString("BOUNCY\r\n"); // ZZZZZZZZZZZZZZ
+  }
+  */
+
+
+
 #endif
   #ifdef INVERT_LIMIT_PIN_MASK
     pin ^= INVERT_LIMIT_PIN_MASK;
@@ -259,6 +299,8 @@ ISR(WDT_vect) // Watchdog timer ISR
 // TODO: Move limit pin-specific calls to a general function for portability.
 void limits_go_home(uint8_t cycle_mask)
 {
+  //char buffer[30];  // ZZZZZZZZZZZZZZ
+  //printString("HOME START\r\n"); // ZZZZZZZZZZZZZZ
   if (sys.abort) { return; } // Block if system reset has been issued.
 
   // Initialize plan data struct for homing motion. Spindle and coolant are disabled.
@@ -297,6 +339,7 @@ void limits_go_home(uint8_t cycle_mask)
   PORTPINDEF axislock;
   uint8_t limit_state, n_active_axis;
   do {
+	  //printString("STATE CHANGE\r\n"); // ZZZZZZZZZZZZZZ
 
     system_convert_array_steps_to_mpos(target,sys_position);
 
@@ -349,13 +392,30 @@ void limits_go_home(uint8_t cycle_mask)
       if (approach) {
         // Check limit state. Lock out cycle axes when they change.
         limit_state = limits_get_state();
+
+        /*
+        if (limit_state!=0)
+        {
+			printString("STATE: "); // ZZZZZZZZZZZZZZ
+			itoa (limit_state, buffer, 10); // ZZZZZZZZZZZZZZ
+			printString(buffer); // ZZZZZZZZZZZZZZ
+			printString("\r\n"); // ZZZZZZZZZZZZZZ
+        }
+        */
+
         for (idx=0; idx<N_AXIS; idx++) {
           if (axislock & step_pin[idx]) {
             if (limit_state & (1 << idx)) {
+              //printString("STATE: "); // ZZZZZZZZZZZZZZ
+              //itoa (limit_state, buffer, 10); // ZZZZZZZZZZZZZZ
+              //printString(buffer); // ZZZZZZZZZZZZZZ
+              //printString("\r\n"); // ZZZZZZZZZZZZZZ
+
               #ifdef COREXY
                 if (idx==Z_AXIS) { axislock &= ~(step_pin[Z_AXIS]); }
                 else { axislock &= ~(step_pin[A_MOTOR]|step_pin[B_MOTOR]); }
               #else
+
                 axislock &= ~(step_pin[idx]);
               #endif
             }
@@ -447,6 +507,8 @@ void limits_go_home(uint8_t cycle_mask)
     }
   }
   sys.step_control = STEP_CONTROL_NORMAL_OP; // Return step control to normal operation.
+
+  //printString("HOME END\r\n"); // ZZZZZZZZZZZZZZ
 }
 
 
