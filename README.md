@@ -2,6 +2,8 @@
 
 https://www.kurokesu.com/shop/SCE2-M
 
+![](doc/SCE2-M_2.png)
+
 **Futher documentation will be released soon**
 
 
