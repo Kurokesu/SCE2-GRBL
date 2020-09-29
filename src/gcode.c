@@ -475,9 +475,9 @@ uint8_t gc_execute_line(char *line)
 
 
   // [xx. G100]: TMC control
-  // G100 P0 L96 N0 S2 F2 $0D$0A
+  // G100 P0 L96 N0 S2 F2 R2 $0D$0A
   if (gc_block.non_modal_command == NON_MODAL_G100) {
-    if (bit_isfalse(value_words,bit(WORD_P))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [P word missing]
+	if (bit_isfalse(value_words,bit(WORD_P))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [P word missing]
     bit_false(value_words, bit(WORD_P));
 
     if (bit_isfalse(value_words,bit(WORD_L))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [L word missing]
@@ -491,6 +491,10 @@ uint8_t gc_execute_line(char *line)
 
     if (bit_isfalse(value_words,bit(WORD_F))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [F word missing]
     bit_false(value_words, bit(WORD_F));
+
+    if (bit_isfalse(value_words,bit(WORD_R))) { FAIL(STATUS_GCODE_VALUE_WORD_MISSING); } // [R word missing]
+	bit_false(value_words, bit(WORD_R));
+
   }
 
   // [xx. G101]: TMC read
@@ -1047,7 +1051,7 @@ uint8_t gc_execute_line(char *line)
   if (gc_block.non_modal_command == NON_MODAL_G100) {
 	  // if enabled will be synced with command queue
 	  //protocol_buffer_synchronize();
-	  tmc_set(gc_block.values.p, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f);
+	  tmc_set(gc_block.values.p, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f, gc_block.values.r);
   }
 
 
