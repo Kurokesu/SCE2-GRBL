@@ -1051,7 +1051,17 @@ uint8_t gc_execute_line(char *line)
   if (gc_block.non_modal_command == NON_MODAL_G100) {
 	  // if enabled will be synced with command queue
 	  //protocol_buffer_synchronize();
-	  tmc_set(gc_block.values.p, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f, gc_block.values.r);
+
+	  // if motor id = 9, set parameters for all motors (useful if power needs to be set in single command for example $N block)
+	  if(gc_block.values.p != 9)
+		  tmc_set(gc_block.values.p, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f, gc_block.values.r);
+	  else
+	  {
+		  tmc_set(0, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f, gc_block.values.r);
+		  tmc_set(1, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f, gc_block.values.r);
+		  tmc_set(2, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f, gc_block.values.r);
+		  tmc_set(3, gc_block.values.l, gc_block.values.n, gc_block.values.s, gc_block.values.f, gc_block.values.r);
+	  }
   }
 
 
