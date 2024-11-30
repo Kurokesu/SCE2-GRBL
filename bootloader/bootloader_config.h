@@ -2,9 +2,8 @@
 #define BOOTLOADER_CONFIG
 
 /* Skip unwanted dfuDNLOAD_SYNC phase. Slightly improve speed, but don't meets DFU1.1 state diagram */
-#ifndef DFU_DNLOAD_NOSYNC
-#define DFU_DNLOAD_NOSYNC   _ENABLE
-#endif
+#define DFU_DNLOAD_NOSYNC   _DISABLE
+
 /** Add extra DFU interface for EEPROM */
 #ifndef DFU_INTF_EEPROM
 #define DFU_INTF_EEPROM     _AUTO
@@ -117,44 +116,6 @@
 #define DFU_WCID _DISABLE
 #endif
 /* Cipher to use. set _DISABLE or choose from implemented ciphers */
-#ifndef DFU_CIPHER
-#define DFU_CIPHER          DFU_CIPHER_RC5
-#endif
-#ifndef DFU_CIPHER_MODE
-#define DFU_CIPHER_MODE     DFU_CIPHER_CBC
-#endif
-/** DFU secure key. */
-#define DFU_AES_KEY_A       0x2D, 0x4D, 0x61, 0x6B, 0x65, 0x4C, 0x6F, 0x76, \
-                            0x65, 0x4E, 0x6F, 0x74, 0x57, 0x61, 0x72, 0x2D
-#define DFU_AES_KEY_B       0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, \
-                            0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F
-#ifndef DFU_AES_KEY_128
-#define DFU_AES_KEY_128     DFU_AES_KEY_A
-#endif
-
-#ifndef DFU_AES_KEY_192
-#define DFU_AES_KEY_192     0x2D, 0x4D, 0x61, 0x6B, 0x65, 0x4C, 0x6F, 0x76, \
-                            0x65, 0x4E, 0x6F, 0x74, 0x57, 0x61, 0x72, 0x2D, \
-                            0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-#endif
-
-#ifndef DFU_AES_KEY_256
-#define DFU_AES_KEY_256     DFU_AES_KEY_A, DFU_AES_KEY_B
-#endif
-
-/** cipher initialization vector for block cipher and CHACHA */
-#ifndef DFU_AES_IV_64
-#define DFU_AES_IV_64       0x44, 0x33, 0x22, 0x11, 0x88, 0x77, 0x66, 0x55
-#endif
-
-#ifndef DFU_AES_IV_96
-#define DFU_AES_IV_96       0x44, 0x33, 0x22, 0x11, 0x88, 0x77, 0x66, 0x55, \
-                            0xCC, 0xBB, 0xAA, 0x99
-#endif
-
-#ifndef DFU_AES_IV_128
-#define DFU_AES_IV_128      0x44, 0x33, 0x22, 0x11, 0x88, 0x77, 0x66, 0x55,\
-                            0xCC, 0xBB, 0xAA, 0x99, 0x44, 0x33, 0x22, 0x11
-#endif
+#define DFU_CIPHER          _DISABLE
 
 #endif //BOOTLOADER_CONFIG
