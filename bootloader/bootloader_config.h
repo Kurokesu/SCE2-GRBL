@@ -8,29 +8,23 @@
 #define DFU_INTF_EEPROM     _DISABLE
 
 /** Firmware can be uploaded from device */
-#ifndef DFU_CAN_UPLOAD
 #define DFU_CAN_UPLOAD      _ENABLE
-#endif
+
 /** Handle DFU_DETACH request in DFU mode. System reset will be issued. */
-#ifndef DFU_DETACH
 #define DFU_DETACH          _ENABLE
-#endif
+
 /** Whether application image is verified by a checksum algorithm */
-#ifndef DFU_VERIFY_CHECKSUM
 #define DFU_VERIFY_CHECKSUM _DISABLE
-#endif
+
 /** Memory Readout Protection level **/
-#ifndef DFU_SEAL_LEVEL
 #define DFU_SEAL_LEVEL      0
-#endif
+
 /* USB VID */
-#ifndef DFU_VENDOR_ID
 #define DFU_VENDOR_ID       0x0483
-#endif
+
 /* USB PID */
-#ifndef DFU_DEVICE_ID
 #define DFU_DEVICE_ID       0xDF11
-#endif
+
 /* USB manufacturer string */
 #ifndef DFU_STR_MANUF
 #define DFU_STR_MANUF       "Your company name"
