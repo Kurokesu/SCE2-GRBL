@@ -36,12 +36,9 @@
 #define DFU_STR_CONFIG      "SCE2-GRBL DFU"
 
 /* USB string for DFU flash interface string descriptor. */
-#ifndef DFU_DSC_FLASH
 #define DFU_DSC_FLASH       _ENABLE
-#endif
-#ifndef DFU_STR_FLASH
 #define DFU_STR_FLASH       "Internal flash"
-#endif
+
 /* USB string for DFU EEPROM interface sreing descriptor */
 #ifndef DFU_DSC_EEPROM
 #define DFU_DSC_EEPROM      _ENABLE
