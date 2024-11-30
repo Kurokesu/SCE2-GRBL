@@ -26,20 +26,15 @@
 #define DFU_DEVICE_ID       0xDF11
 
 /* USB manufacturer string */
-#ifndef DFU_STR_MANUF
-#define DFU_STR_MANUF       "Your company name"
-#endif
+#define DFU_STR_MANUF       "Kurokesu"
+
 /* USB product sting */
-#ifndef DFU_STR_PRODUCT
-#define DFU_STR_PRODUCT     "Secure bootloader"
-#endif
-/* USB string for DFU configureation string descriptor. */
-#ifndef DFU_DSC_CONFIG
+#define DFU_STR_PRODUCT     "SCE2-GRBL bootloader"
+
+/* USB string for DFU configuration string descriptor. */
 #define DFU_DSC_CONFIG      _ENABLE
-#endif
-#ifndef DFU_STR_CONFIG
-#define DFU_STR_CONFIG      "DFU"
-#endif
+#define DFU_STR_CONFIG      "SCE2-GRBL DFU"
+
 /* USB string for DFU flash interface string descriptor. */
 #ifndef DFU_DSC_FLASH
 #define DFU_DSC_FLASH       _ENABLE
