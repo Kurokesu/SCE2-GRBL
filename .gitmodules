@@ -1,0 +1,3 @@
+[submodule "bootloader/sboot-stm32"]
+	path = bootloader/sboot-stm32
+	url = git@github.com:dmitrystu/sboot_stm32.git
