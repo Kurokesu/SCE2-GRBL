@@ -55,20 +55,15 @@
 #define DFU_BOOTKEY_ADDR    _AUTO
 
 /* DFU bootstrap port/pin settings. Set GPIOx or _DISABLE */
-#ifndef DFU_BOOTSTRAP_GPIO
-#define DFU_BOOTSTRAP_GPIO  GPIOA
-#endif
-#ifndef DFU_BOOTSTRAP_PIN
+#define DFU_BOOTSTRAP_GPIO  _DISABLE
 #define DFU_BOOTSTRAP_PIN   1
-#endif
+
 /* Active bootstrap pin logic level. _HIGH, _LOW */
-#ifndef DFU_BOOTSTRAP_LEVEL
 #define DFU_BOOTSTRAP_LEVEL _LOW
-#endif
+
 /* Pullup or pulldown settings for the bootstrap pin _AUTO, _DISABLE, _HIGH, _LOW */
-#ifndef DFU_BOOTSTRAP_PULL
 #define DFU_BOOTSTRAP_PULL  _AUTO
-#endif
+
 /* Double reset waiting time in mS. _DISABLE or time in mS */
 #ifndef DFU_DBLRESET_MS
 #define DFU_DBLRESET_MS     300
