@@ -1,13 +1,12 @@
 #ifndef BOOTLOADER_CONFIG
 #define BOOTLOADER_CONFIG
 
-/* Skip unwanted dfuDNLOAD_SYNC phase. Slightly improve speed, but don't meets DFU1.1 state diagram */
+/* Skip unwanted dfuDNLOAD_SYNC phase. Slightly improve speed, but doesn't meet DFU1.1 state diagram */
 #define DFU_DNLOAD_NOSYNC   _DISABLE
 
 /** Add extra DFU interface for EEPROM */
-#ifndef DFU_INTF_EEPROM
-#define DFU_INTF_EEPROM     _AUTO
-#endif
+#define DFU_INTF_EEPROM     _DISABLE
+
 /** Firmware can be uploaded from device */
 #ifndef DFU_CAN_UPLOAD
 #define DFU_CAN_UPLOAD      _ENABLE
