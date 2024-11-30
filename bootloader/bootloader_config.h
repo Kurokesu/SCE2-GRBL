@@ -40,33 +40,20 @@
 #define DFU_STR_FLASH       "Internal flash"
 
 /* USB string for DFU EEPROM interface sreing descriptor */
-#ifndef DFU_DSC_EEPROM
-#define DFU_DSC_EEPROM      _ENABLE
-#endif
-#ifndef DFU_STR_EEPROM
-#define DFU_STR_EEPROM       "Internal EEPROM"
-#endif
-/* USB EP0 size. Must be 8 for USB FS */
-#define DFU_EP0_SIZE        8
+#define DFU_DSC_EEPROM      _DISABLE
+
 /* DFU properties */
-#ifndef DFU_POLL_TIMEOUT
 #define DFU_POLL_TIMEOUT    20
-#endif
-#ifndef DFU_DETACH_TIMEOUT
 #define DFU_DETACH_TIMEOUT  200
-#endif
-#ifndef DFU_BLOCKSZ
 #define DFU_BLOCKSZ         0x80
-#endif
+
 /* 32 bit DFU bootkey value */
-#ifndef DFU_BOOTKEY
 #define DFU_BOOTKEY         0x157F32D4
-#endif
+
 /* DFU bootkey address. Top of the ram by default. _AUTO, _DISABLE or set address.
  * May be enabled internally. */
-#ifndef DFU_BOOTKEY_ADDR
 #define DFU_BOOTKEY_ADDR    _AUTO
-#endif
+
 /* DFU bootstrap port/pin settings. Set GPIOx or _DISABLE */
 #ifndef DFU_BOOTSTRAP_GPIO
 #define DFU_BOOTSTRAP_GPIO  GPIOA
