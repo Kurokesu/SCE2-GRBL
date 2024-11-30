@@ -65,18 +65,15 @@
 #define DFU_BOOTSTRAP_PULL  _AUTO
 
 /* Double reset waiting time in mS. _DISABLE or time in mS */
-#ifndef DFU_DBLRESET_MS
 #define DFU_DBLRESET_MS     300
-#endif
+
 /* User application address. _AUTO or page aligned address.
  * for _AUTO check __app_start address in output linker map file*/
-#ifndef DFU_APP_START
 #define DFU_APP_START       _AUTO
-#endif
+
 /* User application size. _AUTO or required size in bytes. */
-#ifndef DFU_APP_SIZE
 #define DFU_APP_SIZE        _AUTO
-#endif
+
 /* Microsoft WCID allows automatic driver (WinUSB) installation on device
  * connection. Use _ENABLE to make your device likeable by Windows. */
 #ifndef DFU_WCID
