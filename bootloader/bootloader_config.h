@@ -76,9 +76,8 @@
 
 /* Microsoft WCID allows automatic driver (WinUSB) installation on device
  * connection. Use _ENABLE to make your device likeable by Windows. */
-#ifndef DFU_WCID
-#define DFU_WCID _DISABLE
-#endif
+#define DFU_WCID _ENABLE
+
 /* Cipher to use. set _DISABLE or choose from implemented ciphers */
 #define DFU_CIPHER          _DISABLE
 
