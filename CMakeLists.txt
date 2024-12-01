@@ -66,7 +66,16 @@ set(sources_SRCS
 set(include_DIRS)
 
 # Include directories for each compiler
-set(include_c_DIRS)
+set(include_c_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/CMSIS/Device/ST/STM32F10x/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/CMSIS/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/stm_usb_fs_lib/inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/usb
+    ${CMAKE_CURRENT_SOURCE_DIR}/util
+)
+
 set(include_cxx_DIRS)
 set(include_asm_DIRS)
 
