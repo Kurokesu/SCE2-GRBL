@@ -115,7 +115,7 @@ target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
     >
     $<$<COMPILE_LANGUAGE:ASM>:-x assembler-with-cpp -MMD -MP>
     $<$<CONFIG:Debug>:-Og -g3 -ggdb>
-    $<$<CONFIG:Release>:-Og -g0>
+    $<$<CONFIG:Release>:-Ofast>
 )
 
 # Linker options
