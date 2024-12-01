@@ -32,7 +32,34 @@ set(cpu_PARAMS
 
 # Sources
 set(sources_SRCS
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/main.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/startup_stm32f10x_md.s
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/system_stm32f10x.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/system.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/coolant_control.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/eeprom.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/gcode.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/jog.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/limits.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/motion_control.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/nuts_bolts.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/print.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/probe.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/protocol.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/report.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/serial.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/settings.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/spindle_control.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/stepper.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/tmc2300.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/usb/hw_config.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/usb/usb_desc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/usb/usb_endp.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/usb/usb_istr.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/usb/usb_prop.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/usb/usb_pwr.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/stm32f10x_it.c
 )
 
 # Include directories for all compilers
