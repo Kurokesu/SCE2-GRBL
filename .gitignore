@@ -1,5 +1,8 @@
 *.bat
 .settings
 
+# Exclude build directory
+build
+
 # Exclude vscode files
 *.code-workspace
