@@ -80,7 +80,17 @@ set(include_cxx_DIRS)
 set(include_asm_DIRS)
 
 # Symbols definition for all compilers
-set(symbols_SYMB)
+set(symbols_SYMB
+    "STM32F10X_MD"
+    "USE_STDPERIPH_DRIVER"
+    "LEDBLINK"
+    "USEUSB"
+    "STM32F103C8"
+    "STM32F103C8T6"
+    "_GRBL_"
+    "__ASSEMBLY__"
+    "USE_TMC2300"
+)
 
 # Symbols definition for each compiler
 set(symbols_c_SYMB)
