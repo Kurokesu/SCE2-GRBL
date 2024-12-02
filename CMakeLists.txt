@@ -52,6 +52,8 @@ set(sources_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/settings.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/spindle_control.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/stepper.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/syscall.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sysmem.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/tmc2300.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/misc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c
