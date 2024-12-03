@@ -97,7 +97,8 @@
 // g-code programs, maybe selected for interface programs.
 // NOTE: If changed, manually update help message in report.c.
 
-#define CMD_RESET 0x18 // ctrl-x.
+#define CMD_RESET 0x18 // ctrl-x
+#define CMD_BOOTLOADER 0x04 // ctrl-d
 #define CMD_STATUS_REPORT '?'
 #define CMD_CYCLE_START '~'
 #define CMD_FEED_HOLD '!'
