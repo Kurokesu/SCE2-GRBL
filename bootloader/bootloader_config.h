@@ -29,11 +29,11 @@
 #define DFU_STR_MANUF       "Kurokesu"
 
 /* USB product sting */
-#define DFU_STR_PRODUCT     "SCE2-GRBL bootloader"
+#define DFU_STR_PRODUCT     "SCE2-M DFU"
 
 /* USB string for DFU configuration string descriptor. */
 #define DFU_DSC_CONFIG      _ENABLE
-#define DFU_STR_CONFIG      "SCE2-GRBL DFU"
+#define DFU_STR_CONFIG      "DFU"
 
 /* USB string for DFU flash interface string descriptor. */
 #define DFU_DSC_FLASH       _ENABLE
