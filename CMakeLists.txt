@@ -55,13 +55,13 @@ set(sources_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/syscall.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sysmem.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/tmc2300.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/misc.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/STM32F10x_StdPeriph_Driver/src/misc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c
     ${CMAKE_CURRENT_SOURCE_DIR}/stm_usb_fs_lib/src/usb_core.c
     ${CMAKE_CURRENT_SOURCE_DIR}/stm_usb_fs_lib/src/usb_init.c
     ${CMAKE_CURRENT_SOURCE_DIR}/stm_usb_fs_lib/src/usb_int.c
@@ -83,9 +83,9 @@ set(include_DIRS)
 # Include directories for each compiler
 set(include_c_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/inc
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/CMSIS/Device/ST/STM32F10x/Include
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/CMSIS/Include
-    ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/STM32F10x_StdPeriph_Driver/inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/CMSIS/Device/ST/STM32F10x/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/CMSIS/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs/STM32F10x_StdPeriph_Driver/inc
     ${CMAKE_CURRENT_SOURCE_DIR}/stm_usb_fs_lib/inc
     ${CMAKE_CURRENT_SOURCE_DIR}/usb
     ${CMAKE_CURRENT_SOURCE_DIR}/util
