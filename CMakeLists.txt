@@ -151,7 +151,7 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     $<$<COMPILE_LANGUAGE:ASM>: ${symbols_asm_SYMB}>
 
     # Configuration specific
-    $<$<CONFIG:Debug>:DEBUG>
+    $<$<CONFIG:Debug>: >
     $<$<CONFIG:Release>: >
 )
 
