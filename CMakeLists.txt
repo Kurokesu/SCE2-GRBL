@@ -141,6 +141,9 @@ set(compiler_OPTS)
 # Linker options
 set(linker_OPTS)
 
+# Add bootloader subdirectory for managing dependancies
+add_subdirectory(bootloader)
+
 # Link directories setup
 # Must be before executable is added
 link_directories(${CMAKE_PROJECT_NAME} ${link_DIRS})
