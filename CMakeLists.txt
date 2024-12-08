@@ -14,6 +14,22 @@ project(SCE2-GRBL)
 enable_language(C CXX ASM)
 message("Build type: " ${CMAKE_BUILD_TYPE})
 
+# Check if we're in a git repository
+find_package(Git REQUIRED)
+
+# Update git submodules
+message(STATUS "Updating Git submodules...")
+execute_process(
+    COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    RESULT_VARIABLE result
+)
+
+if(result)
+    message(FATAL_ERROR "Failed to update submodules (error code: ${result})")
+endif()
+
+
 # Setup compiler settings
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
