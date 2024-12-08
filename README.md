@@ -16,3 +16,23 @@ This repository is based on [usbcnc grbl](https://github.com/usbcnc/grbl) which 
 # Dimensions
 ![](doc/SCE2-M_2.png)
 
+# Getting started
+## Toolchain setup
+- Install [cmake](https://cmake.org/download)
+- Download [ninja](https://github.com/ninja-build/ninja/releases) and add it to your `Path`
+- Install [arm-none-eabi-gcc](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) toolchain, make sure to add it to `Path`
+
+### Bootloader dependancies
+The bootloader project uses a `Makefile` for its build process, so your system must be able to run the `make` command.
+
+- [Install chocolatey](https://chocolatey.org/install)
+- `choco install make` and add to `Path`
+
+## Recommended vscode extensions (optional)
+- [cmake-tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
+
+## Build the project
+
+- `cmake --build .\build\release --`
+
+
