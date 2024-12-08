@@ -6,3 +6,7 @@ build
 
 # Exclude vscode files
 *.code-workspace
+
+# Exclude cmake generated files
+CMakeCache.txt
+CMakeFiles
