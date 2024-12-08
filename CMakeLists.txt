@@ -20,7 +20,7 @@ find_package(Git REQUIRED)
 # Update git submodules
 message(STATUS "Updating Git submodules...")
 execute_process(
-    COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+    COMMAND ${GIT_EXECUTABLE} submodule update --depth 1 --init --recursive
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     RESULT_VARIABLE result
 )
