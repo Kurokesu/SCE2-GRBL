@@ -34,5 +34,3 @@ The bootloader project uses a `Makefile` for its build process, so your system m
 ## Build the project
 
 - `cmake --build .\build\release --`
-
-

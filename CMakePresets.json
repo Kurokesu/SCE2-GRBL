@@ -24,6 +24,13 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
+        },
+        {
+            "name": "bootloader",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "sce2-grbl-boot"
+            }
         }
     ],
     "buildPresets": [
@@ -34,6 +41,10 @@
         {
             "name": "release",
             "configurePreset": "release"
+        },
+        {
+            "name": "bootloader",
+            "configurePreset": "bootloader"
         }
     ]
 }
