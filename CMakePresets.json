@@ -29,7 +29,7 @@
             "name": "bootloader",
             "inherits": "default",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "sce2-grbl-boot"
+                "CMAKE_BUILD_TYPE": "bootloader"
             }
         }
     ],
@@ -43,8 +43,16 @@
             "configurePreset": "release"
         },
         {
-            "name": "bootloader",
-            "configurePreset": "bootloader"
+            "name": "stm32f103x8",
+            "configurePreset": "bootloader",
+            "description": "Bootloader build for stm32f103x8",
+            "targets": ["bootloader-stm32f103x8"]
+        },
+        {
+            "name": "stm32f103xb",
+            "configurePreset": "bootloader",
+            "description": "Bootloader build for stm32f103xb",
+            "targets": ["bootloader-stm32f103xb"]
         }
     ]
 }
