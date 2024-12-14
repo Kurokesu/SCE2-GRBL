@@ -1,9 +1,3 @@
 [submodule "bootloader/sboot-stm32"]
 	path = bootloader/sboot-stm32
 	url = https://github.com/dmitrystu/sboot_stm32.git
-[submodule "bootloader/cmsis_5"]
-	path = bootloader/cmsis_5
-	url = https://github.com/ARM-software/CMSIS_5.git
-[submodule "bootloader/stm32h/ST"]
-	path = bootloader/stm32h/ST
-	url = https://github.com/dmitrystu/stm32h.git
