@@ -1,13 +1,22 @@
 set(bootloader_name sce2-grbl-boot)
 
+set(bootloader_targets
+    stm32f103x8
+    stm32f103xb
+)
+
+message(STATUS "Updating bootloader dependencies...")
+execute_process(
+    COMMAND make prerequisites
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32
+)
+
 function(create_bootloader_target target_mcu)
     set(fw_name ${bootloader_name}-${target_mcu})
 
     add_custom_target(bootloader-${target_mcu} ALL
         COMMAND make
             FWNAME=${fw_name}
-            CMSIS=${CMAKE_CURRENT_LIST_DIR}/cmsis_5
-            CMSISDEV=${CMAKE_CURRENT_LIST_DIR}/stm32h
             DFU_USER_CONFIG=${CMAKE_CURRENT_LIST_DIR}/bootloader_config.h
             ${target_mcu}
         WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32
@@ -20,5 +29,6 @@ function(create_bootloader_target target_mcu)
     )
 endfunction()
 
-create_bootloader_target(stm32f103x8)
-create_bootloader_target(stm32f103xb)
+foreach(target ${bootloader_targets})
+    create_bootloader_target(${target})
+endforeach()
