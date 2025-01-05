@@ -36,6 +36,31 @@ if(result)
     message(FATAL_ERROR "Failed to update submodules (error code: ${result})")
 endif()
 
+find_package(Python REQUIRED COMPONENTS Interpreter)
+
+# Path to requirements.txt
+set(REQUIREMENTS_FILE "${CMAKE_SOURCE_DIR}/requirements.txt")
+
+# Install Python packages
+execute_process(
+    COMMAND ${Python_EXECUTABLE} -m pip install -r ${REQUIREMENTS_FILE}
+)
+
+# Query Python for the Scripts directory
+execute_process(
+    COMMAND ${Python_EXECUTABLE} -c "import sysconfig; print(sysconfig.get_path('scripts'))"
+    OUTPUT_VARIABLE PYTHON_SCRIPTS_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+# Verify the Scripts directory exists
+if(EXISTS "${PYTHON_SCRIPTS_DIR}")
+    message(STATUS "Python Scripts directory: ${PYTHON_SCRIPTS_DIR}")
+else()
+    message(FATAL_ERROR "Python Scripts directory not found: ${PYTHON_SCRIPTS_DIR}")
+endif()
+
+
 set(BOOTLOADER_NAME_PREFIX sce2-grbl-boot)
 
 # Setup compiler settings
