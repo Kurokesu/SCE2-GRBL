@@ -12,46 +12,65 @@
             }
         },
         {
-            "name": "debug",
+            "name": "stm32f103x8-debug",
             "inherits": "default",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "TARGET_MCU": "stm32f103x8"
             }
         },
         {
-            "name": "release",
+            "name": "stm32f103x8-release",
             "inherits": "default",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_BUILD_TYPE": "Release",
+                "TARGET_MCU": "stm32f103x8"
             }
         },
         {
-            "name": "bootloader",
+            "name": "stm32f103x8-bootloader",
             "inherits": "default",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "bootloader"
+                "CMAKE_BUILD_TYPE": "Release",
+                "TARGET_MCU": "stm32f103x8"
+            }
+        },
+        {
+            "name": "stm32f103xb-debug",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "TARGET_MCU": "stm32f103xb"
+            }
+        },
+        {
+            "name": "stm32f103xb-release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "TARGET_MCU": "stm32f103xb"
+            }
+        },
+        {
+            "name": "stm32f103xb-bootloader",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "TARGET_MCU": "stm32f103xb"
             }
         }
     ],
     "buildPresets": [
         {
-            "name": "debug",
-            "configurePreset": "debug"
-        },
-        {
-            "name": "release",
-            "configurePreset": "release"
-        },
-        {
-            "name": "stm32f103x8",
-            "configurePreset": "bootloader",
-            "description": "Bootloader build for stm32f103x8",
+            "name": "stm32f103x8-bootloader",
+            "displayName": "Bootloader",
+            "configurePreset": "stm32f103x8-bootloader",
             "targets": ["bootloader-stm32f103x8"]
         },
         {
-            "name": "stm32f103xb",
-            "configurePreset": "bootloader",
-            "description": "Bootloader build for stm32f103xb",
+            "name": "stm32f103xb-bootloader",
+            "displayName": "Bootloader",
+            "configurePreset": "stm32f103xb-bootloader",
             "targets": ["bootloader-stm32f103xb"]
         }
     ]

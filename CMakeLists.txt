@@ -9,6 +9,13 @@ message(STATUS "Build CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 include("cmake/gcc-arm-none-eabi.cmake")
 message(STATUS "Build CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
+# Define the target MCU
+if(NOT DEFINED TARGET_MCU)
+    set(TARGET_MCU "STM32F103C8" CACHE STRING "Target STM32 MCU")
+endif()
+
+message(STATUS "Target MCU: ${TARGET_MCU}")
+
 # Core project settings
 project(sce2-grbl)
 enable_language(C CXX ASM)
@@ -134,7 +141,7 @@ set(link_DIRS)
 set(link_LIBS)
 
 # Linker script
-set(linker_script_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32_flash.ld)
+set(linker_script_SRC ${CMAKE_CURRENT_SOURCE_DIR}/${TARGET_MCU}_flash.ld)
 
 # Compiler options
 set(compiler_OPTS)
