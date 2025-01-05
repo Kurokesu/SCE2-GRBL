@@ -37,17 +37,9 @@
         },
         {
             "type": "shell",
-            "label": "CubeProg: Flash project (SWD)",
-            "command": "STM32_Programmer_CLI",
-            "args": [
-                "--connect",
-                "port=swd",
-                "mode=UR",  //Under reset
-                "--download", "${command:cmake.launchTargetPath}",
-                "-hardRst", // Hardware reset - if rst pin is connected
-                "-rst",     // Software reset (backup)
-                "--start"   // Start execution
-            ],
+            "label": "dfu-util: Flash dfu file",
+            "command": "dfu-util",
+            "args": ["-D", "${command:cmake.buildDirectory}/sce2-grbl.dfu", "-R"],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -55,36 +47,9 @@
         },
         {
             "type": "shell",
-            "label": "CubeProg: Flash bootloader (SWD)",
-            "command": "STM32_Programmer_CLI",
-            "args": [
-                "--connect",
-                "port=swd",
-                "mode=UR",  //Under reset
-                "--download", "./bootloader/sboot-stm32/build/sce2-grbl-boot-${command:cmake.activeBuildPresetName}.elf",
-                "-hardRst", // Hardware reset - if rst pin is connected
-                "-rst",     // Software reset (backup)
-                "--start"   // Start execution
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": []
-        },
-        {
-            "type": "shell",
-            "label": "CubeProg: Flash project with defined serial number (SWD) - you must set serial number first",
-            "command": "STM32_Programmer_CLI",
-            "args": [
-                "--connect",
-                "port=swd",
-                "mode=UR",  //Under reset
-                "sn=<yourserialnumber>",
-                "--download", "${command:cmake.launchTargetPath}",
-                "-hardRst", // Hardware reset - if rst pin is connected
-                "-rst",     // Software reset (backup)
-                "--start"   // Start execution
-            ],
+            "label": "dfu-util: List currently attached DFU capable devices",
+            "command": "dfu-util",
+            "args": ["--list", "--device", "0x0483:0xDF11"],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
