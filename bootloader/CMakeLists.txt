@@ -1,5 +1,3 @@
-set(bootloader_name sce2-grbl-boot)
-
 set(bootloader_targets
     stm32f103x8
     stm32f103xb
@@ -12,16 +10,16 @@ execute_process(
 )
 
 function(create_bootloader_target target_mcu)
-    set(fw_name ${bootloader_name}-${target_mcu})
+    set(fw_name ${BOOTLOADER_NAME_PREFIX}-${target_mcu})
 
-    add_custom_target(bootloader-${target_mcu} ALL
+    add_custom_target(bootloader-${target_mcu}
         COMMAND make
             FWNAME=${fw_name}
             DFU_USER_CONFIG=${CMAKE_CURRENT_LIST_DIR}/bootloader_config.h
             ${target_mcu}
         WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32
         COMMENT "Building ${fw_name}"
-        BYPRODUCTS
+        OUTPUT
             ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${fw_name}.bin
             ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${fw_name}.hex
             ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${fw_name}.elf

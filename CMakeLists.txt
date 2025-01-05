@@ -29,6 +29,7 @@ if(result)
     message(FATAL_ERROR "Failed to update submodules (error code: ${result})")
 endif()
 
+set(BOOTLOADER_NAME_PREFIX sce2-grbl-boot)
 
 # Setup compiler settings
 set(CMAKE_C_STANDARD 11)
