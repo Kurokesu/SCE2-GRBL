@@ -5,14 +5,14 @@ cmake_minimum_required(VERSION 3.22)
 #
 
 list(APPEND CMAKE_MODULE_PATH "{{sr:cmake_path}}")
-message("Build CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
+message(STATUS "Build CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 include("cmake/gcc-arm-none-eabi.cmake")
-message("Build CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
+message(STATUS "Build CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
 # Core project settings
-project(SCE2-GRBL)
+project(sce2-grbl)
 enable_language(C CXX ASM)
-message("Build type: " ${CMAKE_BUILD_TYPE})
+message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
 
 # Check if we're in a git repository
 find_package(Git REQUIRED)
