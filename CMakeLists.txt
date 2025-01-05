@@ -60,8 +60,16 @@ else()
     message(FATAL_ERROR "Python Scripts directory not found: ${PYTHON_SCRIPTS_DIR}")
 endif()
 
+# Path to the STM32CubeProgrammer CLI tool
+set(STM32CUBE_PROG "STM32_Programmer_CLI")
 
 set(BOOTLOADER_NAME_PREFIX sce2-grbl-boot)
+
+set(APP_BIN_FILE ${CMAKE_PROJECT_NAME}.bin)
+set(APP_HEX_FILE ${CMAKE_PROJECT_NAME}.hex)
+set(FULL_HEX_FILE ${CMAKE_PROJECT_NAME}_full.hex)
+set(DFU_FILE ${CMAKE_PROJECT_NAME}.dfu)
+set(BOOT_HEX_FILE ${CMAKE_CURRENT_SOURCE_DIR}/bootloader/sboot-stm32/build/${BOOTLOADER_NAME_PREFIX}-${TARGET_MCU}.hex)
 
 # Setup compiler settings
 set(CMAKE_C_STANDARD 11)
@@ -252,6 +260,54 @@ target_link_options(${CMAKE_PROJECT_NAME} PRIVATE
 # Execute post-build to print size, generate hex and bin
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${CMAKE_PROJECT_NAME}>
-    COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:${CMAKE_PROJECT_NAME}> ${CMAKE_PROJECT_NAME}.hex
-    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${CMAKE_PROJECT_NAME}> ${CMAKE_PROJECT_NAME}.bin
+    COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:${CMAKE_PROJECT_NAME}> ${APP_HEX_FILE}
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${CMAKE_PROJECT_NAME}> ${APP_BIN_FILE}
+    BYPRODUCTS ${APP_HEX_FILE} ${APP_BIN_FILE}
+)
+
+add_custom_target(flash_app
+    COMMAND ${STM32CUBE_PROG} -c port=SWD -w ${APP_HEX_FILE}
+    COMMENT "Flashing application using STM32CubeProgrammer"
+    DEPENDS ${CMAKE_PROJECT_NAME}
+)
+
+add_custom_command(
+    OUTPUT ${DFU_FILE}
+    COMMENT "Generating DFU file for updates via bootloader ${DFU_FILE}"
+    COMMAND ${CMAKE_COMMAND} -E copy ${APP_BIN_FILE} ${DFU_FILE}
+    COMMAND dfu-suffix -v 0x0483 -p 0xdf11 --add ${DFU_FILE}
+    MAIN_DEPENDENCY ${APP_BIN_FILE}
+)
+
+add_custom_target(app_dfu
+    DEPENDS ${DFU_FILE}
+)
+
+add_custom_target(flash_app_dfu
+    COMMAND dfu-util -D ${DFU_FILE} -R
+    COMMENT "Flashing app using bootloader"
+    DEPENDS ${DFU_FILE}
+)
+
+add_custom_command(
+    OUTPUT ${FULL_HEX_FILE}
+    COMMENT "Generating full hex file containing bootloader + application ${FULL_HEX_FILE}"
+    COMMAND ${Python_EXECUTABLE} ${PYTHON_SCRIPTS_DIR}/hexmerge.py --output=${FULL_HEX_FILE} --overlap=replace ${BOOT_HEX_FILE} ${APP_HEX_FILE}
+    DEPENDS bootloader-${TARGET_MCU} ${APP_HEX_FILE}
+)
+
+add_custom_target(full_hex
+    DEPENDS ${FULL_HEX_FILE}
+)
+
+add_custom_target(flash_full_hex
+    COMMAND ${STM32CUBE_PROG} -c port=SWD -w ${FULL_HEX_FILE}
+    COMMENT "Flashing application and bootloader using STM32CubeProgrammer"
+    DEPENDS ${FULL_HEX_FILE}
+)
+
+add_custom_target(flash_boot
+    COMMAND ${STM32CUBE_PROG} -c port=SWD -w ${BOOT_HEX_FILE}
+    COMMENT "Flashing bootloader using STM32CubeProgrammer"
+    DEPENDS bootloader-${TARGET_MCU}
 )
