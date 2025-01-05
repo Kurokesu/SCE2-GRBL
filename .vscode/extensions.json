@@ -1,5 +1,7 @@
 {
     "recommendations": [
-        "ms-vscode.cmake-tools"
+        "ms-vscode.cmake-tools",
+        "marus25.cortex-debug",
+        "ms-vscode.cpptools-extension-pack"
     ]
 }
