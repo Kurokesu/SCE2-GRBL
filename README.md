@@ -25,7 +25,7 @@ Before you can build the bootloader and firmware, you need to set up your develo
 ### 1. CMake
 CMake is a build automation tool that helps manage the build process of the project.
 
-- **Download CMake**: [Download CMake](https://cmake.org/download)
+- **Download CMake**: [https://cmake.org/download](https://cmake.org/download)
 - Follow the installation instructions and ensure that CMake is added to your system's `Path` environment variable.
 
 #### Test CMake Installation:
@@ -40,7 +40,7 @@ If installed correctly, the CMake version will be displayed.
 ### 2. Ninja Build System
 Ninja is a small, fast build system used by the project.
 
-- **Download Ninja**: [Download Ninja](https://github.com/ninja-build/ninja/releases)
+- **Download Ninja**: [https://github.com/ninja-build/ninja/releases](https://github.com/ninja-build/ninja/releases)
 - Add the Ninja executable to your `Path` environment variable so you can run it from the command line.
 
 #### Test Ninja Installation:
@@ -55,7 +55,7 @@ You should see the Ninja version output if installed correctly.
 ### 3. GNU Arm Toolchain
 The STM32 bootloader and firmware project requires the `arm-none-eabi-gcc` toolchain for cross-compiling for ARM-based microcontrollers.
 
-- **Download ARM Toolchain**: [Download arm-none-eabi-gcc](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+- **Download ARM Toolchain**: [https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
 - After installing the toolchain, add it to your system’s `Path` environment variable so you can use commands like `arm-none-eabi-gcc` from anywhere.
 
 #### Test GNU Arm Toolchain Installation:
@@ -68,11 +68,14 @@ This should print the version of the ARM compiler.
 ---
 
 ### 4. Python
-Python is required for merging bootloader and application hex files. 
+Python intelhex package is used by cmake for merging bootloader and application hex files. 
 
-- **IntelHex**: The [intelhex](https://pypi.org/project/intelhex) pip package is used for this. It is automatically installed by `cmake`.
-- **Download Python**: [Download Python](https://www.python.org/downloads/)
+- **Download Python**: [https://www.python.org/downloads/](https://www.python.org/downloads/)
 - During installation, ensure you check the option to add Python to the `Path` environment variable.
+- The [intelhex](https://pypi.org/project/intelhex) pip package is used for merging hex files. It is automatically installed by `cmake`. But can also be installed manually:
+```bash
+pip install -r ./requirements.txt
+```
 
 #### Test Python Installation:
 Open a terminal and run:
@@ -89,7 +92,7 @@ pip --version
 ### 5. Install Chocolatey
 The bootloader project uses a `Makefile` to control its build process. To successfully build the bootloader, you need the `make` utility. We recommend installing the Chocolatey package manager for Windows, which simplifies the installation of `make`.
 
-- **Install Chocolatey**: [Follow the instructions here](https://chocolatey.org/install) or run the following command:
+- **Install Chocolatey**: [Follow the instructions here](https://chocolatey.org/install) or run the following command in `PowerShell`:
     ```bash
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     ```
@@ -124,10 +127,10 @@ If installed correctly, the Make version will be displayed.
 
 ## Install DFU Utilities
 
-For performing device firmware upgrades via the USB bootloader, `dfu-util` is required. This tool is also used to generate `.dfu` files for the firmware.
+For performing device firmware upgrades via the USB bootloader, `dfu-util` is required. This tool is also used to generate `.dfu` files containing firmware updates.
 
-- **Download dfu-util**: [dfu-util Releases](https://dfu-util.sourceforge.net/releases/)
-- After downloading and installing, ensure the `dfu-util` executable is added to your `Path` environment variable so it can be accessed from the command line.
+- **Download dfu-util**: [https://dfu-util.sourceforge.net/releases/](https://dfu-util.sourceforge.net/releases/)
+- After downloading ensure the `dfu-util` executable is added to your `Path` environment variable so it can be accessed from the command line.
 
 #### Test dfu-util Installation:
 Open a terminal and run:
