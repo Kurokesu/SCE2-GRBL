@@ -141,4 +141,10 @@ You should see the version output if the installation was successful.
 
 ## Build the project
 
-- `cmake --build .\build\release --`
+The recommended tool for working with the project is Visual Studio Code (VS Code). VS Code provides tasks that simplify various build aspects and extensions that help with CMake integration.
+
+## Flash FW update via bootloader
+
+```bash
+dfu-util -D .\build\stm32f103xb-release\sce2-grbl.dfu -R
+```
