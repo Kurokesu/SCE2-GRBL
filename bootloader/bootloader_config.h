@@ -20,10 +20,14 @@
 #define DFU_SEAL_LEVEL      0
 
 /* USB VID */
-#define DFU_VENDOR_ID       0x0483
+#ifndef DFU_VENDOR_ID
+#define DFU_VENDOR_ID       0x16D0
+#endif
 
 /* USB PID */
-#define DFU_DEVICE_ID       0xDF11
+#ifndef DFU_DEVICE_ID
+#define DFU_DEVICE_ID       0x10A2
+#endif
 
 /* USB manufacturer string */
 #define DFU_STR_MANUF       "Kurokesu"

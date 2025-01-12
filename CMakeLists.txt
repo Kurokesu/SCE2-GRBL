@@ -78,6 +78,9 @@ set(FULL_HEX_FILE ${CMAKE_PROJECT_NAME}_full.hex)
 set(DFU_FILE ${CMAKE_PROJECT_NAME}.dfu)
 set(BOOT_HEX_FILE ${CMAKE_CURRENT_SOURCE_DIR}/bootloader/sboot-stm32/build/${BOOTLOADER_NAME}.hex)
 
+set(BOOT_USB_VENDOR_ID 0x16D0)
+set(BOOT_USB_PRODUCT_ID 0x10A2)
+
 # Setup compiler settings
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -274,9 +277,9 @@ add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
 
 add_custom_command(
     OUTPUT ${DFU_FILE}
-    COMMENT "Generating DFU file for updates via bootloader ${DFU_FILE}"
+    COMMENT "Generating DFU file ${DFU_FILE} with vendor id ${BOOT_USB_VENDOR_ID} and product id ${BOOT_USB_PRODUCT_ID}"
     COMMAND ${CMAKE_COMMAND} -E copy ${APP_BIN_FILE} ${DFU_FILE}
-    COMMAND ${DFU_SUFFIX_COMMAND} -v 0x0483 -p 0xdf11 --add ${DFU_FILE}
+    COMMAND ${DFU_SUFFIX_COMMAND} -v ${BOOT_USB_VENDOR_ID} -p ${BOOT_USB_PRODUCT_ID} --add ${DFU_FILE}
     MAIN_DEPENDENCY ${APP_BIN_FILE}
 )
 
