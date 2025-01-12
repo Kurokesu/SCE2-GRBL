@@ -1,32 +1,19 @@
-set(bootloader_targets
-    stm32f103x8
-    stm32f103xb
-)
-
 message(STATUS "Updating bootloader dependencies...")
 execute_process(
     COMMAND make prerequisites
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32
 )
 
-function(create_bootloader_target target_mcu)
-    set(fw_name ${BOOTLOADER_NAME_PREFIX}-${target_mcu})
-
-    add_custom_target(bootloader-${target_mcu}
-        COMMAND make
-            FWNAME=${fw_name}
-            DFU_USER_CONFIG=${CMAKE_CURRENT_LIST_DIR}/bootloader_config.h
-            ${target_mcu}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32
-        COMMENT "Building ${fw_name}"
-        OUTPUT
-            ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${fw_name}.bin
-            ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${fw_name}.hex
-            ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${fw_name}.elf
-            ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${fw_name}.map
-    )
-endfunction()
-
-foreach(target ${bootloader_targets})
-    create_bootloader_target(${target})
-endforeach()
+add_custom_target(build_boot
+    COMMAND make
+        FWNAME=${BOOTLOADER_NAME}
+        DFU_USER_CONFIG=${CMAKE_CURRENT_LIST_DIR}/bootloader_config.h
+        ${TARGET_MCU}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32
+    COMMENT "Building ${BOOTLOADER_NAME}"
+    BYPRODUCTS
+        ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${BOOTLOADER_NAME}.hex
+        ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${BOOTLOADER_NAME}.bin
+        ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${BOOTLOADER_NAME}.elf
+        ${CMAKE_CURRENT_LIST_DIR}/sboot-stm32/build/${BOOTLOADER_NAME}.map
+)
