@@ -60,8 +60,14 @@ else()
     message(FATAL_ERROR "Python Scripts directory not found: ${PYTHON_SCRIPTS_DIR}")
 endif()
 
+set(PYTHON_HEXMERGE "${PYTHON_SCRIPTS_DIR}/hexmerge.py")
+
 # Path to the STM32CubeProgrammer CLI tool
-set(STM32CUBE_PROG "STM32_Programmer_CLI")
+set(STM32CUBE_PROG_COMMAND "STM32_Programmer_CLI")
+
+# Path to dfu-util
+set(DFU_UTIL_COMMAND "dfu-util")
+set(DFU_SUFFIX_COMMAND "dfu-suffix")
 
 set(BOOTLOADER_NAME_PREFIX sce2-grbl-boot)
 set(BOOTLOADER_NAME ${BOOTLOADER_NAME_PREFIX}-${TARGET_MCU})
@@ -270,14 +276,14 @@ add_custom_command(
     OUTPUT ${DFU_FILE}
     COMMENT "Generating DFU file for updates via bootloader ${DFU_FILE}"
     COMMAND ${CMAKE_COMMAND} -E copy ${APP_BIN_FILE} ${DFU_FILE}
-    COMMAND dfu-suffix -v 0x0483 -p 0xdf11 --add ${DFU_FILE}
+    COMMAND ${DFU_SUFFIX_COMMAND} -v 0x0483 -p 0xdf11 --add ${DFU_FILE}
     MAIN_DEPENDENCY ${APP_BIN_FILE}
 )
 
 add_custom_command(
     OUTPUT ${FULL_HEX_FILE}
     COMMENT "Generating full hex file containing bootloader + application ${FULL_HEX_FILE}"
-    COMMAND ${Python_EXECUTABLE} ${PYTHON_SCRIPTS_DIR}/hexmerge.py --output=${FULL_HEX_FILE} --overlap=replace ${BOOT_HEX_FILE} ${APP_HEX_FILE}
+    COMMAND ${Python_EXECUTABLE} ${PYTHON_HEXMERGE} --output=${FULL_HEX_FILE} --overlap=replace ${BOOT_HEX_FILE} ${APP_HEX_FILE}
     DEPENDS ${BOOT_HEX_FILE} ${APP_HEX_FILE}
 )
 
@@ -290,25 +296,25 @@ add_custom_target(build_full_hex
 )
 
 add_custom_target(flash_app
-    COMMAND ${STM32CUBE_PROG} -c port=SWD -w ${APP_HEX_FILE}
+    COMMAND ${STM32CUBE_PROG_COMMAND} -c port=SWD -w ${APP_HEX_FILE}
     COMMENT "Flashing application using STM32CubeProgrammer"
-    DEPENDS ${CMAKE_PROJECT_NAME}
+    DEPENDS ${APP_HEX_FILE}
 )
 
 add_custom_target(flash_app_dfu
-    COMMAND dfu-util -D ${DFU_FILE} -R
+    COMMAND ${DFU_UTIL_COMMAND} -D ${DFU_FILE} -R
     COMMENT "Flashing app using bootloader"
     DEPENDS ${DFU_FILE}
 )
 
 add_custom_target(flash_boot
-    COMMAND ${STM32CUBE_PROG} -c port=SWD -w ${BOOT_HEX_FILE}
+    COMMAND ${STM32CUBE_PROG_COMMAND} -c port=SWD -w ${BOOT_HEX_FILE}
     COMMENT "Flashing bootloader using STM32CubeProgrammer"
     DEPENDS ${BOOT_HEX_FILE}
 )
 
 add_custom_target(flash_full_hex
-    COMMAND ${STM32CUBE_PROG} -c port=SWD -w ${FULL_HEX_FILE}
+    COMMAND ${STM32CUBE_PROG_COMMAND} -c port=SWD -w ${FULL_HEX_FILE}
     COMMENT "Flashing application and bootloader using STM32CubeProgrammer"
     DEPENDS ${FULL_HEX_FILE}
 )
