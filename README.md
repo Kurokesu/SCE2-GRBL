@@ -163,19 +163,22 @@ If installed correctly, the Make version will be displayed.
 
 ---
 
-## Install DFU Utilities
+### 8. Install STM32CubeCLI
 
-For performing device firmware upgrades via the USB bootloader, `dfu-util` is required. This tool is also used to generate `.dfu` files containing firmware updates.
+STM32CubeCLI is a command-line interface for STM32 microcontrollers, which can be used for programming and debugging.
 
-- **Download dfu-util**: [https://dfu-util.sourceforge.net/releases/](https://dfu-util.sourceforge.net/releases/)
-- After downloading ensure the `dfu-util` executable is added to your `Path` environment variable so it can be accessed from the command line.
+- **Download STM32CubeCLI**: [https://www.st.com/en/development-tools/stm32cubeclt.html](https://www.st.com/en/development-tools/stm32cubeclt.html)
+- Follow the installation instructions provided on the website.
+- Ensure the STM32CubeCLI executable is added to your `Path` environment variable so it can be accessed from the command line.
 
-#### Test dfu-util Installation:
+#### Test STM32CubeCLI Installation:
 Open a terminal and run:
 ```bash
-dfu-util --version
+STM32_Programmer_CLI --version
 ```
 You should see the version output if the installation was successful.
+
+---
 
 ## Build the project
 
