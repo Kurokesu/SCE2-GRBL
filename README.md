@@ -18,6 +18,41 @@ This repository is based on [usbcnc grbl](https://github.com/usbcnc/grbl) which 
 
 # Getting Started
 
+## Flashing FW update via bootloader
+
+### Install DFU Utilities
+
+For performing device firmware upgrades via the USB bootloader, `dfu-util` is required.
+
+- **Download dfu-util**: [https://dfu-util.sourceforge.net/releases/](https://dfu-util.sourceforge.net/releases/)
+- After downloading ensure the `dfu-util` executable is added to your `Path` environment variable so it can be accessed from the command line.
+
+#### Test dfu-util Installation:
+Open a terminal and run:
+```bash
+dfu-util --version
+```
+You should see the version output if the installation was successful.
+
+### Using pre-built release files
+
+If you do not wish to build the firmware from source, you can use the pre-built release files.
+
+1. Download the latest firmware release from the [Releases](https://github.com/Kurokesu/SCE2-GRBL/releases) page.
+2. Use `dfu-util` to flash the downloaded `.dfu` file to your device.
+
+```bash
+dfu-util -D path/to/downloaded/sce2-grbl.dfu -R
+```
+
+### Using built files
+
+If you have built the firmware from source, you can flash the generated `.dfu` file.
+
+```bash
+dfu-util -D .\build\stm32f103xb-release\sce2-grbl.dfu -R
+```
+
 ## Install Build Tools
 
 Before you can build the bootloader and firmware, you need to set up your development environment. Below are the steps for installing the necessary tools on **Windows**.
