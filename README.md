@@ -55,9 +55,12 @@ dfu-util -D .\build\stm32f103xb-release\sce2-grbl.dfu -R
 
 ## Install Build Tools
 
-Before you can build the bootloader and firmware, you need to set up your development environment. Below are the steps for installing the necessary tools on **Windows**.
+The following steps are for users who want to build the bootloader and firmware from source. Before you can build the bootloader and firmware, you need to set up your development environment. Below are the steps for installing the necessary tools on **Windows**.
 
-### 1. CMake
+### 1. Ensure `dfu-util` is ready to go
+Follow the instructions in the [Install DFU Utilities](#install-dfu-utilities) section to install `dfu-util`.
+
+### 2. CMake
 CMake is a build automation tool that helps manage the build process of the project.
 
 - **Download CMake**: [https://cmake.org/download](https://cmake.org/download)
@@ -72,7 +75,7 @@ If installed correctly, the CMake version will be displayed.
 
 ---
 
-### 2. Ninja Build System
+### 3. Ninja Build System
 Ninja is a small, fast build system used by the project.
 
 - **Download Ninja**: [https://github.com/ninja-build/ninja/releases](https://github.com/ninja-build/ninja/releases)
@@ -87,7 +90,7 @@ You should see the Ninja version output if installed correctly.
 
 ---
 
-### 3. GNU Arm Toolchain
+### 4. GNU Arm Toolchain
 The STM32 bootloader and firmware project requires the `arm-none-eabi-gcc` toolchain for cross-compiling for ARM-based microcontrollers.
 
 - **Download ARM Toolchain**: [https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
@@ -102,8 +105,8 @@ This should print the version of the ARM compiler.
 
 ---
 
-### 4. Python
-Python intelhex package is used by cmake for merging bootloader and application hex files. 
+### 5. Python
+Python IntelHex package is used by CMake for merging bootloader and application hex files. 
 
 - **Download Python**: [https://www.python.org/downloads/](https://www.python.org/downloads/)
 - During installation, ensure you check the option to add Python to the `Path` environment variable.
@@ -124,7 +127,7 @@ pip --version
 
 ---
 
-### 5. Install Chocolatey
+### 6. Install Chocolatey
 The bootloader project uses a `Makefile` to control its build process. To successfully build the bootloader, you need the `make` utility. We recommend installing the Chocolatey package manager for Windows, which simplifies the installation of `make`.
 
 - **Install Chocolatey**: [Follow the instructions here](https://chocolatey.org/install) or run the following command in `PowerShell`:
@@ -141,7 +144,7 @@ You should see the Chocolatey version output.
 
 ---
 
-### 6. Install Make
+### 7. Install Make
 After installing Chocolatey, use it to install `make`:
 
 - **Command**:
