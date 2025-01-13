@@ -199,6 +199,40 @@ The recommended tool for working with the project is Visual Studio Code (VS Code
 
 ![](doc/vscode_debugger.gif)
 
+### Build manually
+
+#### Available target MCUs:
+- `stm32f103x8`- target MCU with 64KB flash memory.
+- `stm32f103xb`- target MCU with 128KB flash memory.
+
+#### Available build configurations:
+- Debug: Builds with debugging information.
+  - `./build/stm32f103x8-debug`
+  - `./build/stm32f103xb-debug`
+- Release: Optimized builds for production.
+  - `./build/stm32f103x8-release`
+  - `./build/stm32f103xb-release`
+
+#### Available build types:
+- `Debug`
+- `Release`
+
+#### Available targets
+- `sce2-grbl` - build main SCE2-GRBL application.
+- `build_app_dfu` - generate application DFU file for firmware updates.
+- `build_boot` - build bootloader for MCU.
+- `build_full_hex` - generate hex file containing both bootloader and application.
+- `flash_app` - flash main application to MCU.
+- `flash_app_dfu` - flash application DFU file using bootloader.
+- `flash_boot` - flash bootloader to MCU.
+- `flash_full_hex` - flash both application and bootloader to MCU.
+
+#### Configure build:
 ```bash
-dfu-util -D .\build\stm32f103xb-release\sce2-grbl.dfu -R
+cmake -DCMAKE_BUILD_TYPE=Release -DTARGET_MCU=stm32f103xb -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=./cmake/gcc-arm-none-eabi.cmake -S ./ -B ./build/stm32f103xb-release -G Ninja
+```
+
+#### Build application:
+```bash
+cmake --build ./build/stm32f103xb-release
 ```
