@@ -182,9 +182,22 @@ You should see the version output if the installation was successful.
 
 ## Build the project
 
-The recommended tool for working with the project is Visual Studio Code (VS Code). VS Code provides tasks that simplify various build aspects and extensions that help with CMake integration.
+Once all the tools are installed we can finally try to build.
 
-## Flash FW update via bootloader
+The recommended tool for working with the project is Visual Studio Code (VS Code). VS Code provides tasks that simplify various build aspects and extensions that help with CMake integration. However, building manually is also supported, see [Build manually](#build-manually) section.
+
+### Build using vscode
+#### Install recommended extensions
+
+![](doc/vscode_recommended.gif)
+
+#### Select cmake build configuration and build
+
+![](doc/vscode_cmake.gif)
+
+#### Debug builds can be attached to a debugger
+
+![](doc/vscode_debugger.gif)
 
 ```bash
 dfu-util -D .\build\stm32f103xb-release\sce2-grbl.dfu -R
