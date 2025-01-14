@@ -62,9 +62,9 @@ dfu-util -D .\build\stm32f103xb-release\sce2-grbl.dfu -R
 
 ## Install Build Tools
 
-The following steps are for users who want to build the bootloader and firmware from source. Before you can build the bootloader and firmware, you need to set up your development environment. Below are the steps for installing the necessary tools on **Windows** and **Linux**.
+The following steps are for users who want to build the bootloader and firmware from source. Before you can build the bootloader and firmware, you need to set up your development environment. Below are the steps for installing the necessary tools on **Windows** and [**Linux**](#set-up-build-tools-on-linux).
 
-### Windows
+### Set up build tools on Windows
 
 #### 1. Ensure `dfu-util` is ready to go
 Follow the instructions in the [Install DFU Utilities](#install-dfu-utilities) section to install `dfu-util`.
@@ -189,7 +189,7 @@ You should see the version output if the installation was successful.
 
 ---
 
-### Linux
+### Set up build tools on Linux
 
 #### 1. Ensure `dfu-util` is ready to go
 Follow the instructions in the [Install DFU Utilities](#install-dfu-utilities) section to install `dfu-util`.
