@@ -24,8 +24,15 @@ This repository is based on [usbcnc grbl](https://github.com/usbcnc/grbl) which 
 
 For performing device firmware upgrades via the USB bootloader, `dfu-util` is required.
 
+#### Windows
 - **Download dfu-util**: [https://dfu-util.sourceforge.net/releases/](https://dfu-util.sourceforge.net/releases/)
 - After downloading ensure the `dfu-util` executable is added to your `Path` environment variable so it can be accessed from the command line.
+
+#### Linux
+- **Install dfu-util**:
+    ```bash
+    sudo apt-get install dfu-util
+    ```
 
 #### Test dfu-util Installation:
 Open a terminal and run:
@@ -55,12 +62,14 @@ dfu-util -D .\build\stm32f103xb-release\sce2-grbl.dfu -R
 
 ## Install Build Tools
 
-The following steps are for users who want to build the bootloader and firmware from source. Before you can build the bootloader and firmware, you need to set up your development environment. Below are the steps for installing the necessary tools on **Windows**.
+The following steps are for users who want to build the bootloader and firmware from source. Before you can build the bootloader and firmware, you need to set up your development environment. Below are the steps for installing the necessary tools on **Windows** and **Linux**.
 
-### 1. Ensure `dfu-util` is ready to go
+### Windows
+
+#### 1. Ensure `dfu-util` is ready to go
 Follow the instructions in the [Install DFU Utilities](#install-dfu-utilities) section to install `dfu-util`.
 
-### 2. CMake
+#### 2. CMake
 CMake is a build automation tool that helps manage the build process of the project.
 
 - **Download CMake**: [https://cmake.org/download](https://cmake.org/download)
@@ -75,7 +84,7 @@ If installed correctly, the CMake version will be displayed.
 
 ---
 
-### 3. Ninja Build System
+#### 3. Ninja Build System
 Ninja is a small, fast build system used by the project.
 
 - **Download Ninja**: [https://github.com/ninja-build/ninja/releases](https://github.com/ninja-build/ninja/releases)
@@ -90,7 +99,7 @@ You should see the Ninja version output if installed correctly.
 
 ---
 
-### 4. GNU Arm Toolchain
+#### 4. GNU Arm Toolchain
 The STM32 bootloader and firmware project requires the `arm-none-eabi-gcc` toolchain for cross-compiling for ARM-based microcontrollers.
 
 - **Download ARM Toolchain**: [https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
@@ -105,7 +114,7 @@ This should print the version of the ARM compiler.
 
 ---
 
-### 5. Python
+#### 5. Python
 Python IntelHex package is used by CMake for merging bootloader and application hex files. 
 
 - **Download Python**: [https://www.python.org/downloads/](https://www.python.org/downloads/)
@@ -127,7 +136,7 @@ pip --version
 
 ---
 
-### 6. Install Chocolatey
+#### 6. Install Chocolatey
 The bootloader project uses a `Makefile` to control its build process. To successfully build the bootloader, you need the `make` utility. We recommend installing the Chocolatey package manager for Windows, which simplifies the installation of `make`.
 
 - **Install Chocolatey**: [Follow the instructions here](https://chocolatey.org/install) or run the following command in `PowerShell`:
@@ -144,7 +153,7 @@ You should see the Chocolatey version output.
 
 ---
 
-### 7. Install Make
+#### 7. Install Make
 After installing Chocolatey, use it to install `make`:
 
 - **Command**:
@@ -163,13 +172,132 @@ If installed correctly, the Make version will be displayed.
 
 ---
 
-### 8. Install STM32CubeCLI
+#### 8. Install STM32CubeCLI
 
 STM32CubeCLI is a command-line interface for STM32 microcontrollers, which can be used for programming and debugging.
 
 - **Download STM32CubeCLI**: [https://www.st.com/en/development-tools/stm32cubeclt.html](https://www.st.com/en/development-tools/stm32cubeclt.html)
 - Follow the installation instructions provided on the website.
 - Ensure the STM32CubeCLI executable is added to your `Path` environment variable so it can be accessed from the command line.
+
+#### Test STM32CubeCLI Installation:
+Open a terminal and run:
+```bash
+STM32_Programmer_CLI --version
+```
+You should see the version output if the installation was successful.
+
+---
+
+### Linux
+
+#### 1. Ensure `dfu-util` is ready to go
+Follow the instructions in the [Install DFU Utilities](#install-dfu-utilities) section to install `dfu-util`.
+
+#### 2. CMake
+CMake is a build automation tool that helps manage the build process of the project.
+
+- **Install CMake**:
+    ```bash
+    sudo apt-get install cmake
+    ```
+
+#### Test CMake Installation:
+Open a terminal and run:
+```bash
+cmake --version
+```
+If installed correctly, the CMake version will be displayed.
+
+---
+
+#### 3. Ninja Build System
+Ninja is a small, fast build system used by the project.
+
+- **Install Ninja**:
+    ```bash
+    sudo apt-get install ninja-build
+    ```
+
+#### Test Ninja Installation:
+Open a terminal and run:
+```bash
+ninja --version
+```
+You should see the Ninja version output if installed correctly.
+
+---
+
+#### 4. GNU Arm Toolchain
+The STM32 bootloader and firmware project requires the `arm-none-eabi-gcc` toolchain for cross-compiling for ARM-based microcontrollers.
+
+- **Install ARM Toolchain**:
+    ```bash
+    sudo apt-get install gcc-arm-none-eabi
+    ```
+
+#### Test GNU Arm Toolchain Installation:
+Open a terminal and run:
+```bash
+arm-none-eabi-gcc --version
+```
+This should print the version of the ARM compiler.
+
+---
+
+#### 5. Python
+Python IntelHex package is used by CMake for merging bootloader and application hex files. 
+
+- **Install Python**:
+    ```bash
+    sudo apt-get install python3 python3-pip
+    ```
+
+- **Install IntelHex**:
+    ```bash
+    pip3 install intelhex
+    ```
+
+#### Test Python Installation:
+Open a terminal and run:
+```bash
+python3 --version
+```
+You should see the Python version. Additionally, test `pip`:
+```bash
+pip3 --version
+```
+
+---
+
+#### 6. Install Make
+The bootloader project uses a `Makefile` to control its build process. To successfully build the bootloader, you need the `make` utility.
+
+- **Install Make**:
+    ```bash
+    sudo apt-get install build-essential
+    ```
+
+#### Test Make Installation:
+Open a terminal and run:
+```bash
+make --version
+```
+If installed correctly, the Make version will be displayed.
+
+---
+
+#### 7. Install STM32CubeCLI
+
+STM32CubeCLI is a command-line interface for STM32 microcontrollers, which can be used for programming and debugging.
+
+- **Download STM32CubeCLI**: [https://www.st.com/en/development-tools/stm32cubeclt.html](https://www.st.com/en/development-tools/stm32cubeclt.html)
+- Follow the installation instructions provided on the website.
+- Extract the downloaded archive and navigate to the extracted directory.
+- Copy the `STM32_Programmer_CLI` executable to a directory in your `PATH`, for example:
+  ```bash
+  sudo cp STM32_Programmer_CLI /usr/local/bin/
+  ```
 
 #### Test STM32CubeCLI Installation:
 Open a terminal and run:
