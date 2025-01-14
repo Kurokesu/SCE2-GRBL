@@ -192,7 +192,7 @@ You should see the version output if the installation was successful.
 ### Set up build tools on Linux
 
 #### 1. Ensure `dfu-util` is ready to go
-Follow the instructions in the [Install DFU Utilities](#install-dfu-utilities) section to install `dfu-util`.
+Follow the instructions in [install DFU utilities](#install-dfu-utilities) section to install `dfu-util`.
 
 #### 2. CMake
 CMake is a build automation tool that helps manage the build process of the project.
@@ -229,7 +229,7 @@ You should see the Ninja version output if installed correctly.
 ---
 
 #### 4. GNU Arm Toolchain
-The STM32 bootloader and firmware project requires the `arm-none-eabi-gcc` toolchain for cross-compiling for ARM-based microcontrollers.
+`arm-none-eabi-gcc` compiler.
 
 - **Install ARM Toolchain**:
     ```bash
@@ -246,17 +246,19 @@ This should print the version of the ARM compiler.
 ---
 
 #### 5. Python
-Python IntelHex package is used by CMake for merging bootloader and application hex files. 
+Python IntelHex package is used by CMake for merging bootloader and application hex files. For it to work make sure to install `python` and `pip`.
 
-- **Install Python**:
-    ```bash
-    sudo apt-get install python3 python3-pip
-    ```
+#### Install Python:
+  ```bash
+  sudo apt-get install python3 python3-pip
+  ```
 
-- **Install IntelHex**:
-    ```bash
-    pip3 install intelhex
-    ```
+#### IntelHex (optional)
+Intelhex is installed automatically by cmake during project config, but you can install python dependencies manually as well:
+
+```bash
+pip3 install -r ./requirements.txt
+```
 
 #### Test Python Installation:
 Open a terminal and run:
@@ -270,15 +272,10 @@ pip3 --version
 
 ---
 
-#### 6. Install Make
+#### 6. make (optional)
 The bootloader project uses a `Makefile` to control its build process. To successfully build the bootloader, you need the `make` utility.
 
-- **Install Make**:
-    ```bash
-    sudo apt-get install build-essential
-    ```
-
-#### Test Make Installation:
+#### Make sure `make` commmand is running:
 Open a terminal and run:
 ```bash
 make --version
