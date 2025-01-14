@@ -246,19 +246,12 @@ This should print the version of the ARM compiler.
 ---
 
 #### 5. Python
-Python IntelHex package is used by CMake for merging bootloader and application hex files. For it to work make sure to install `python` and `pip`.
+Python IntelHex package is used by CMake for merging bootloader and application hex files. Python virtual environment is initialised by cmake upon project config within `build` directory. `intelhex` is run from this environment by cmake. For it to work make sure to install `python`, `python-venv` and `pip`.
 
 #### Install Python:
   ```bash
-  sudo apt-get install python3 python3-pip
+  sudo apt-get install python3 python3-pip python3-venv
   ```
-
-#### IntelHex (optional)
-Intelhex is installed automatically by cmake during project config, but you can install python dependencies manually as well:
-
-```bash
-pip3 install -r ./requirements.txt
-```
 
 #### Test Python Installation:
 Open a terminal and run:
