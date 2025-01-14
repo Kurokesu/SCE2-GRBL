@@ -41,26 +41,32 @@ find_package(Python REQUIRED COMPONENTS Interpreter)
 # Path to requirements.txt
 set(REQUIREMENTS_FILE "${CMAKE_SOURCE_DIR}/requirements.txt")
 
-# Install Python packages
+set(VIRTUAL_ENV_DIR ${CMAKE_SOURCE_DIR}/build/venv)
+
+# Create and activate virtual environment
 execute_process(
-    COMMAND ${Python_EXECUTABLE} -m pip install -r ${REQUIREMENTS_FILE}
+    COMMAND ${Python_EXECUTABLE} -m venv ${VIRTUAL_ENV_DIR}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
 
-# Query Python for the Scripts directory
-execute_process(
-    COMMAND ${Python_EXECUTABLE} -c "import sysconfig; print(sysconfig.get_path('scripts'))"
-    OUTPUT_VARIABLE PYTHON_SCRIPTS_DIR
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-
-# Verify the Scripts directory exists
-if(EXISTS "${PYTHON_SCRIPTS_DIR}")
-    message(STATUS "Python Scripts directory: ${PYTHON_SCRIPTS_DIR}")
+if(CMAKE_HOST_WIN32)
+    message(STATUS "Host OS: Windows")
+    set(PYTHON_VENV_DIR ${VIRTUAL_ENV_DIR}/Scripts)
 else()
-    message(FATAL_ERROR "Python Scripts directory not found: ${PYTHON_SCRIPTS_DIR}")
+    message(STATUS "Host OS: Linux")
+    set(PYTHON_VENV_DIR ${VIRTUAL_ENV_DIR}/bin)
 endif()
 
-set(PYTHON_HEXMERGE "${PYTHON_SCRIPTS_DIR}/hexmerge.py")
+set(PYTHON_COMMAND ${PYTHON_VENV_DIR}/python)
+message(STATUS "Python command: ${PYTHON_COMMAND}")
+
+# Install Python packages in virtual environment
+execute_process(
+    COMMAND ${PYTHON_COMMAND} -m pip install -r ${REQUIREMENTS_FILE}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+
+set(PYTHON_HEXMERGE "${PYTHON_VENV_DIR}/hexmerge.py")
 
 # Path to the STM32CubeProgrammer CLI tool
 set(STM32CUBE_PROG_COMMAND "STM32_Programmer_CLI")
@@ -286,7 +292,7 @@ add_custom_command(
 add_custom_command(
     OUTPUT ${FULL_HEX_FILE}
     COMMENT "Generating full hex file containing bootloader + application ${FULL_HEX_FILE}"
-    COMMAND ${Python_EXECUTABLE} ${PYTHON_HEXMERGE} --output=${FULL_HEX_FILE} --overlap=replace ${BOOT_HEX_FILE} ${APP_HEX_FILE}
+    COMMAND ${PYTHON_COMMAND} ${PYTHON_HEXMERGE} --output=${FULL_HEX_FILE} --overlap=replace ${BOOT_HEX_FILE} ${APP_HEX_FILE}
     DEPENDS ${BOOT_HEX_FILE} ${APP_HEX_FILE}
 )
 
