@@ -277,25 +277,20 @@ If installed correctly, the Make version will be displayed.
 
 ---
 
-#### 7. Install STM32CubeCLI
+#### 7. Install stlink-tools
 
-STM32CubeCLI is a command-line interface for STM32 microcontrollers, which can be used for programming and debugging.
+`stlink-tools` are used for programming and debugging STM32 microcontrollers.
 
-- **Download STM32CubeCLI**: [https://www.st.com/en/development-tools/stm32cubeclt.html](https://www.st.com/en/development-tools/stm32cubeclt.html)
-- Follow the installation instructions provided on the website.
-- Extract the downloaded archive and navigate to the extracted directory.
-- Copy the `STM32_Programmer_CLI` executable to a directory in your `PATH`, for example:
-  ```bash
-  sudo cp STM32_Programmer_CLI /usr/local/bin/
-  ```
+```bash
+sudo apt-get install stlink-tools
+```
 
-#### Test STM32CubeCLI Installation:
+#### Test STLink Tools Installation:
 Open a terminal and run:
 ```bash
-STM32_Programmer_CLI --version
+st-info --version
 ```
 You should see the version output if the installation was successful.
-
 ---
 
 ## Build the project
