@@ -9,7 +9,7 @@
             "toolchainFile": "${sourceDir}/cmake/gcc-arm-none-eabi.cmake",
             "cacheVariables": {
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "STM32_FLASH_TOOL": "st-flash"
+                "STM32_FLASH_TOOL": "STM32_Programmer_CLI"
             }
         },
         {
