@@ -190,6 +190,7 @@ set(symbols_SYMB
     "_GRBL_"
     "__ASSEMBLY__"
     "USE_TMC2300"
+    "HSE_VALUE=12000000"
 )
 
 # Symbols definition for each compiler
