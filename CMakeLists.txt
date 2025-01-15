@@ -68,8 +68,20 @@ execute_process(
 
 set(PYTHON_HEXMERGE "${PYTHON_VENV_DIR}/hexmerge.py")
 
-# Path to the STM32CubeProgrammer CLI tool
-set(STM32CUBE_PROG_COMMAND "STM32_Programmer_CLI")
+# Default flash tool if not defined
+if(NOT DEFINED STM32_FLASH_TOOL)
+    set(STM32_FLASH_TOOL "STM32_Programmer_CLI" CACHE STRING "STM32 flash tool")
+endif()
+
+message(STATUS "STM32 flash tool: ${STM32_FLASH_TOOL}")
+
+if(STM32_FLASH_TOOL STREQUAL "STM32_Programmer_CLI")
+    set(STM32_FLASH_COMMAND ${STM32_FLASH_TOOL} -c port=SWD -w)
+elseif(STM32_FLASH_TOOL STREQUAL "st-flash")
+    set(STM32_FLASH_COMMAND ${STM32_FLASH_TOOL} --format ihex write)
+else()
+    message(FATAL_ERROR "Unknown STM32 flash tool: ${STM32_FLASH_TOOL}")
+endif()
 
 # Path to dfu-util
 set(DFU_UTIL_COMMAND "dfu-util")
@@ -305,8 +317,8 @@ add_custom_target(build_full_hex
 )
 
 add_custom_target(flash_app
-    COMMAND ${STM32CUBE_PROG_COMMAND} -c port=SWD -w ${APP_HEX_FILE}
-    COMMENT "Flashing application using STM32CubeProgrammer"
+    COMMAND ${STM32_FLASH_COMMAND} ${APP_HEX_FILE}
+    COMMENT "Flashing application using ${STM32_FLASH_TOOL}"
     DEPENDS ${APP_HEX_FILE}
 )
 
@@ -317,13 +329,13 @@ add_custom_target(flash_app_dfu
 )
 
 add_custom_target(flash_boot
-    COMMAND ${STM32CUBE_PROG_COMMAND} -c port=SWD -w ${BOOT_HEX_FILE}
-    COMMENT "Flashing bootloader using STM32CubeProgrammer"
+    COMMAND ${STM32_FLASH_COMMAND} ${BOOT_HEX_FILE}
+    COMMENT "Flashing bootloader using ${STM32_FLASH_TOOL}"
     DEPENDS ${BOOT_HEX_FILE}
 )
 
 add_custom_target(flash_full_hex
-    COMMAND ${STM32CUBE_PROG_COMMAND} -c port=SWD -w ${FULL_HEX_FILE}
-    COMMENT "Flashing application and bootloader using STM32CubeProgrammer"
+    COMMAND ${STM32_FLASH_COMMAND} ${FULL_HEX_FILE}
+    COMMENT "Flashing application and bootloader using ${STM32_FLASH_TOOL}"
     DEPENDS ${FULL_HEX_FILE}
 )

@@ -57,7 +57,7 @@
         },
         {
             "type": "shell",
-            "label": "CubeProg: List all available communication interfaces",
+            "label": "STM32_Programmer_CLI: List all available communication interfaces",
             "command": "STM32_Programmer_CLI",
             "args": [
                 "--list",
@@ -67,5 +67,17 @@
             },
             "problemMatcher": []
         },
+        {
+            "type": "shell",
+            "label": "st-info: List all available ST-Link devices",
+            "command": "st-info",
+            "args": [
+                "--probe",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
     ]
 }
