@@ -50,6 +50,9 @@ void SendthreadFunction( void *);
 #define TX_RING_BUFFER (TX_BUFFER_SIZE)
 #endif
 
+#define RAM_TOP_ADDRESS (0x20004FFC)
+#define BOOT_KEY        (0x157F32D4)
+
 uint8_t serial_rx_buffer[RX_RING_BUFFER];
 uint8_t serial_rx_buffer_head = 0;
 volatile uint8_t serial_rx_buffer_tail = 0;
@@ -67,6 +70,16 @@ uint8_t serial3_tx_buffer[TX_RING_BUFFER];
 uint8_t serial3_tx_buffer_head = 0;
 volatile uint8_t serial3_tx_buffer_tail = 0;
 
+static inline void set_boot_key(void)
+{
+  *((uint32_t*)RAM_TOP_ADDRESS) = BOOT_KEY;
+}
+
+static void boot_to_dfu(void)
+{
+  set_boot_key();
+  NVIC_SystemReset();
+}
 
 // Returns the number of bytes available in the RX serial buffer.
 uint8_t serial_get_rx_buffer_available()
@@ -403,6 +416,7 @@ void USART1_IRQHandler (void)
   // not passed into the main buffer, but these set system state flag bits for realtime execution.
   switch (data) {
     case CMD_RESET:         mc_reset(); break; // Call motion control reset routine.
+    case CMD_BOOTLOADER:    boot_to_dfu(); break;
     case CMD_STATUS_REPORT: system_set_exec_state_flag(EXEC_STATUS_REPORT); break; // Set as true
     case CMD_CYCLE_START:   system_set_exec_state_flag(EXEC_CYCLE_START); break; // Set as true
     case CMD_FEED_HOLD:     system_set_exec_state_flag(EXEC_FEED_HOLD); break; // Set as true

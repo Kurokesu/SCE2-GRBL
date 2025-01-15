@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "stlink",
+            "cwd": "${workspaceFolder}",
+            "type": "cortex-debug",
+            "executable": "${command:cmake.launchTargetPath}",
+            "request": "launch", // Use "attach" to connect to target without elf download
+            "servertype": "stlink",
+            "device": "STM32F103",
+            "interface": "swd",
+            "serialNumber": "", // Set ST-Link ID if you use multiple at the same time
+            "runToEntryPoint": "main",
+            "svdFile": "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/SVD/STM32F103.svd", // Path to SVD file to see registers
+            "v1": false,
+            "showDevDebugOutput": "both",
+        },
+        {
+            "name": "st-util",
+            "cwd": "${workspaceFolder}",
+            "type": "cortex-debug",
+            "executable": "${command:cmake.launchTargetPath}",
+            "request": "attach", // Use "attach" to connect to target without elf download
+            "servertype": "stutil",
+            "device": "STM32F103",
+            "interface": "swd",
+            "serialNumber": "", // Set ST-Link ID if you use multiple at the same time
+            "runToEntryPoint": "main",
+            "svdFile": "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/SVD/STM32F103.svd", // Path to SVD file to see registers
+            "v1": false,
+            "showDevDebugOutput": "both",
+        }
+    ]
+}

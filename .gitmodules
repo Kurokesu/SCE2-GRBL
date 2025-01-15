@@ -1,0 +1,4 @@
+[submodule "bootloader/sboot-stm32"]
+	path = bootloader/sboot-stm32
+	url = https://github.com/dmitrystu/sboot_stm32.git
+	ignore = dirty

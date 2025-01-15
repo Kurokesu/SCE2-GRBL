@@ -1,0 +1,49 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "default",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/gcc-arm-none-eabi.cmake",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "STM32_FLASH_TOOL": "STM32_Programmer_CLI"
+            }
+        },
+        {
+            "name": "stm32f103x8-debug",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "TARGET_MCU": "stm32f103x8"
+                
+            }
+        },
+        {
+            "name": "stm32f103x8-release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "TARGET_MCU": "stm32f103x8"
+            }
+        },
+        {
+            "name": "stm32f103xb-debug",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "TARGET_MCU": "stm32f103xb"
+            }
+        },
+        {
+            "name": "stm32f103xb-release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "TARGET_MCU": "stm32f103xb"
+            }
+        }
+    ]
+}
