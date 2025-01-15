@@ -205,9 +205,13 @@ void serial_write(uint8_t data) {
   uint8_t next_head = serial_tx_buffer_head + 1;
   #ifdef STM32F103C8
 #ifndef USEUSB
+  while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+
 	USART_SendData(USART1, data);
-	while (!(USART1->SR & USART_FLAG_TXE));
-    return;
+
+  while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
+
+  return;
 #endif
 #endif
   if (next_head == TX_RING_BUFFER) { next_head = 0; }

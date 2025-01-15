@@ -76,7 +76,6 @@ void USART1_Configuration(u32 BaudRate)
 	USART_InitStructure.USART_Parity = USART_Parity_No;	 
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART1->CR1 |= (USART_CR1_RE | USART_CR1_TE);
 	USART_Init(USART1, &USART_InitStructure);
 	//	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
