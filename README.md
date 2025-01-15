@@ -53,7 +53,8 @@ You should see the version output if the installation was successful.
 If you do not wish to build the firmware from source, you can use the pre-built release files.
 
 1. Download the latest firmware release from the [releases](https://github.com/Kurokesu/SCE2-GRBL/releases) page.
-2. Use `dfu-util` to flash the downloaded `.dfu` file to your device.
+2. Tell the device to enter USB bootloader via `CTRL+D` command from a terminal when application is running.
+3. Use `dfu-util` to flash the downloaded `.dfu` file to your device.
 
 ```bash
 dfu-util -D path/to/downloaded/sce2-grbl.dfu -R
