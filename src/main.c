@@ -67,6 +67,9 @@ void USART1_Configuration(u32 BaudRate)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;	
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
+	// Remap USART1 to PB6 (TX) and PB7 (RX)
+	GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
+
 	USART_InitStructure.USART_BaudRate = BaudRate;	  
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b; 
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;	 
