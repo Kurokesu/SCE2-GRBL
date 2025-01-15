@@ -69,7 +69,7 @@
 #define DFU_BOOTSTRAP_PULL  _AUTO
 
 /* Double reset waiting time in mS. _DISABLE or time in mS */
-#define DFU_DBLRESET_MS     300
+#define DFU_DBLRESET_MS     _DISABLE
 
 /* User application address. _AUTO or page aligned address.
  * for _AUTO check __app_start address in output linker map file*/
